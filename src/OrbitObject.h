@@ -23,6 +23,7 @@ public:
     int getID() { return _id; }
     void setPosition(double r, double theta);
     void getPosition(double &r, double &theta);
+    
     void setVelocity(double vR, double vTheta);
     void getVelocity(double &vR, double &vTheta);
 

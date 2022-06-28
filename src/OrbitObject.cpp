@@ -54,10 +54,17 @@ OrbitObject::getSize(double &size)
 OrbitObject::Simulate()
 {
     threads.emplace_back(std::thread(&OrbitObject::Orbit, this));
+
 }
 
 OrbitObject::Orbit()
 {
+    //Initialise variables
+    bool hasCollided = collisionCheck();
+
+    //TODO: Implement velocity and position update using GR EOMs 
+    // Assume updating every frame which can be 1000/60 ms.
+    // In Game::Update() need to make sure close all the threads made in OrbitObject::Simulate()
 
 
 }
