@@ -12,7 +12,7 @@ enum ObjectType
     target
 };
 
-class OrbitObjects
+class OrbitObject
 {
 public:
     // constructor / desctructor
