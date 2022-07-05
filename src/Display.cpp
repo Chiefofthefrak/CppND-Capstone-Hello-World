@@ -1,29 +1,18 @@
-#ifndef DISPLAY_H
-#define DISPLAY_H
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <iostream>
 
-#include "SDL.h"
-#include <vector>
-#include <thread>
-#include <mutex>
+#include "Display.h"
 
-class Display
+RenderWindow::RenderWindow(const char* p_title, int p_width, int p_height) : window(NULL), renderer(NULL)
 {
-public:
-    // constructor / desctructor
-    Display();
-    ~Display();
+	window = SDL_CreateWindow(p_title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_width, p_height, SDL_WINDOW_SHOW);
 
-    // getter and setter
+	if(window == NULL){
+		std::cout << "Window failed to initialise. Error: " << SDL_GetError() << std::endl;
+	}
+
+	renderer = SDL_CreateRenderer(window,-1, SDL_RENDERER_ACCELERATED);
 
 
-    // typical behaviour methods
-    void Render();
-
-    // behaviour for specific actions
-    
-//TODO: Define key methods and Implement
-protected:
-
-    };
-
-#endif
+}
