@@ -1,6 +1,6 @@
 #include <iostream>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 
 #include "OrbitObject.h"
 #include "Display.h"
@@ -39,7 +39,7 @@ int main(int argc, char* argv[]){
 
 	    mainInput.receiveInput();
 	    mainGame.Update();
-	    mainDisplay.Render();
+	    mainDisplay.Render(mainGame);
 	    frame_end = GetCurrentTimeMS();
 
 	    frame_duration = frame_end - frame_start;

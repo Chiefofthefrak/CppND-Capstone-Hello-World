@@ -46,9 +46,9 @@ OrbitObject::~OrbitObject()
     });
 }
 
-OrbitObject::getSize(double &size)
+OrbitObject::getSize()
 {
-    size = size;
+    return _Size;
 }
 
 OrbitObject::Simulate()
@@ -57,7 +57,7 @@ OrbitObject::Simulate()
 
 }
 
-OrbitObject::Orbit()
+OrbitObject::Orbit(double &r, double &theta, double &x, double &y)
 {
     //Initialise variables
     bool hasCollided = collisionCheck();
@@ -66,5 +66,5 @@ OrbitObject::Orbit()
     // Assume updating every frame which can be 1000/60 ms.
     // In Game::Update() need to make sure close all the threads made in OrbitObject::Simulate()
 
-
+    //In Game make a vector of smart pointers to all the orbit Objects so that render can iterate thru
 }

@@ -13,7 +13,8 @@ public:
     ~Game();
 
     // getter and setter
-    void getOrbiters();
+    std::vector<std::shared_ptr<OrbitObject>> getOrbiters();
+    bool LightFired();
 
     // typical behaviour methods
     void Update();
@@ -23,8 +24,11 @@ public:
     void Win();
     void Lose();
 
+   
+
 protected:
-        std::vector<OrbitObject> orbiters; //Holds a vector of all orbitObjects made by the game
+        bool LightFired = false;
+        std::vector<std::shared_ptr<OrbitObject>> orbitPointers; //Holds a vector of all orbitObjects made by the game
     };
 
 #endif
