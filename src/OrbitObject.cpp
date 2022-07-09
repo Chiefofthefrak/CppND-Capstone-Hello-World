@@ -57,14 +57,19 @@ OrbitObject::Simulate()
 
 }
 
-OrbitObject::Orbit(double &r, double &theta, double &x, double &y)
+OrbitObject::Orbit()
 {
     //Initialise variables
     bool hasCollided = collisionCheck();
+
+    double r, theta, vR, vTheta;
+    getPosition(r,theta);
+    getVelocity(vR,vTheta);
 
     //TODO: Implement velocity and position update using GR EOMs 
     // Assume updating every frame which can be 1000/60 ms.
     // In Game::Update() need to make sure close all the threads made in OrbitObject::Simulate()
 
-    //In Game make a vector of smart pointers to all the orbit Objects so that render can iterate thru
+    setPosition(r,theta);
+    setVelocity(vR,vTheta);
 }

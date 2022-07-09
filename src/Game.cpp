@@ -12,8 +12,18 @@ Game::~Game(){ //TODO
 
 }
 
+Game::Update(){//TODO
+
+}
+Game::readInput(){//TODO
+
+}
+
 Game::LightFired(){
 	return LightFired;
 }
 
 
+Game::getOrbiters(){
+	return orbitPointers;
+}

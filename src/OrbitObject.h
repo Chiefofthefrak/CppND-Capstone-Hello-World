@@ -35,7 +35,7 @@ public:
 
     // typical behaviour methods
     void Simulate();
-    void Orbit(double &r, double &theta, double &x, double &y);
+    void Orbit();
     void collisionCheck();
 
 
@@ -45,7 +45,6 @@ protected:
     ObjectType _type;                 // identifies the class type
     int _id;                          // every orbit object has its own unique id
     double _posR, _posTheta;          // orbit position in polars
-
     double _velR, _velTheta;          // orbit speed in polars
     std::vector<std::thread> threads; // holds all threads that have been launched within this object
     static std::mutex _mtx;           // mutex shared by all orbit objects for protecting cout 
