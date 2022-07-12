@@ -15,13 +15,6 @@ int main(){
 		std::cout << "SDL_INIT has Failed, ERROR: "<< SDL_GetError() << std::endl;
 	}
 
-	// TESTING SDL REMOVE FOR FINAL
-
-
-
-	// TESTING SDL REMOVE FOR FINAL
-
-
 	Uint32 frame_start;
 	Uint32 frame_end;
 	Uint32 frame_duration;
@@ -30,7 +23,7 @@ int main(){
 	Game game(screenwidth,screenheight);
 	Display display(screenwidth,screenheight);
 
-
+	int frameNumber = 0;
 	while (true) {
 	    frame_start = SDL_GetTicks(); // Current time in milliseconds
 	    game.Update();
@@ -42,6 +35,8 @@ int main(){
 	    if (frame_duration < target_frame_duration) {
 	      SDL_Delay(target_frame_duration - frame_duration);
 	    }
+	    frameNumber++;
+	    std::cout << "Frame Number: " <<  frameNumber << std::endl;
 	}
 
 return 0;

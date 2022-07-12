@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 
 #include "Display.h"
@@ -40,17 +41,22 @@ void Display::Render(Game game){
 
 	// Render Orbiters
 	auto orbitersToRender = game.getOrbiters();
-
+	double orbiterPosX, orbiterPosY;
 	for(auto &Orbiter : orbitersToRender){ //TODO: Change depending on what type of pointer is in orbitPointers
 		auto radius = Orbiter->getSize();
 
+		double r,theta;					//Convert Polars to cartesian
+		Orbiter->getPosition(r,theta);
+		orbiterPosX = r*std::cos(theta) + p_width/2;
+		orbiterPosY = r*std::sin(theta) + p_height/2;
+
 		if (Orbiter->getType() != ObjectType::asteroid){
 			SDL_SetRenderDrawColor(sdl_renderer, 0x4B, 0x4B,0x4B, 0xFF);
-			DrawCircle(Orbiter->_posX, Orbiter->_posY, radius);
+			DrawCircle(orbiterPosX, orbiterPosY, radius);
 		}
 		else{
 			SDL_SetRenderDrawColor(sdl_renderer, 0xAF, 0xAF,0xAF, 0xFF);
-			DrawCircle(Orbiter->_posX, Orbiter->_posY, radius);
+			DrawCircle(orbiterPosX, orbiterPosY, radius);
 		}
 	}
 

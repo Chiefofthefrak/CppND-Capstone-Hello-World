@@ -40,8 +40,6 @@ public:
     bool collisionCheck();
 
 
-    double _posX, _posY;              // orbit position in cartesians
-
 protected:
     ObjectType _type;                 // identifies the class type
     int _id;                          // every orbit object has its own unique id
