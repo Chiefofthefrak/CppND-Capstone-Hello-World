@@ -15,7 +15,7 @@ Display::Display(const int p_width, const int p_height) : sdl_window(NULL), sdl_
 		std::cout << "Window failed to initialise. Error: " << SDL_GetError() << std::endl;
 	}
 
-	sdl_renderer = SDL_CreateRenderer(sdl_swindow,-1, SDL_RENDERER_ACCELERATED);
+	sdl_renderer = SDL_CreateRenderer(sdl_window,-1, SDL_RENDERER_ACCELERATED);
 
 	if(sdl_renderer == NULL){
 		std::cout << "renderer failed to initialise. Error: " << SDL_GetError() << std::endl;

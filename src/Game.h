@@ -5,6 +5,7 @@
 #include <thread>
 #include <mutex>
 #include <memory>
+#include "OrbitObject.h"
 
 class Game
 {

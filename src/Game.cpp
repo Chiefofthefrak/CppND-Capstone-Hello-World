@@ -3,7 +3,10 @@
 #include <vector>
 #include <thread>
 
+#include <SDL.h>
+
 #include "Game.h"
+#include "OrbitObject.h"
 
 Game::Game(){ 
 
@@ -48,7 +51,7 @@ void Game::Update(){
 void Game::readInput(double &mouseX, double &mouseY, bool &mousePressed){ //Track Mouse and determine when it's pressed
 
 	SDL_PumpEvents();  // make sure we have the latest mouse state.
-	buttons = SDL_GetMouseState(&mouseX, &mouseY);
+	auto buttons = SDL_GetMouseState(&mouseX, &mouseY);
 
 	if ((buttons & SDL_BUTTON_LMASK) != 0) {
 		mousePressed = true;
