@@ -7,25 +7,29 @@
 int OrbitObject::_idCnt = 0;
 
 
-void OrbitObject::setPosition(double r, double theta)
+void OrbitObject::setPosition(double x, double y)
 {
-    _posR = r;
-    _posTheta = theta;
+    _posX = x;
+    _posY = y;
 }
 
-void OrbitObject::getPosition(double &r, double &theta)
+void OrbitObject::getPosition(double &x, double &y)
 {
-    r = _posR;
-    theta = _posTheta;
+    x = _posX;
+    y = _posY;
 }
 
 
-void OrbitObject::getVelocity(double &E, double &h)
+void OrbitObject::getVelocity(double &vX, double &vY)
 {
-    E = _E;
-    h = _h;
+    vX = _vX;
+    vY = _vY;
 }
-
+void OrbitObject::setVelocity(double vX, double vY)
+{
+    _vX = vX;
+    _vY = vY;
+}
 OrbitObject::OrbitObject(double size, ObjectType type, double posR, double posTheta, double E, double h) : _Size(size), _type(type), _posR(posR), _posTheta(posTheta), _E(E), _h(h)
 {
 
@@ -41,23 +45,34 @@ double OrbitObject::getSize() //returns the radius of the object
 
 void OrbitObject::Orbit() //Updates positions and velocities using Eulers method with a timestep equal to 1000/60 mS
 {
+    double pi = 3.141592654;
+    double forceConstant = 100;
+
     //Initialise variables
     float target_frame_duration = 1000/60; // milliseconds per frame at 60 frames per second.
     bool hasCollided = collisionCheck();
 
-    double r, theta, E, h;
-    getPosition(r,theta);
-    getVelocity(E,h);
-    
+    double x, y, vX, vY;
+    getPosition(x,y);
+    getVelocity(vX,vY);
+
+    double theta;
+    if (y==0){
+        if (x>=0){theta = pi/2;}
+        if (x<0){theta = 3*pi/2;}
+    }else{
+        theta = std::atan2(x/y);
+    }
+    double force = forceConstant/(x*x + y*y);
+    x += vX;
+    y += vY;
+    vX += force* std::sin(theta);
+    vY += force* std::cos(theta);
 
     //position update using GR EOMs 
-    //assume updating every frame which can be 1000/60 ms.
-    double a = (1-(100/r))*((r*r*r*r)/(h*h)+(r*r))/((r*r*r*r*E*E)/(h*h));
-    r += r*r*E*(1-a/2 - (a*a)/8-(a*a*a)/16);
-    theta += h/(r*r);
-
-
-    setPosition(r,theta);
+    //assume updating every frame which can be 1000/60 ms
+    setPosition(x,y);
+    setVelocity(vX,vY);
 
 }
 bool OrbitObject::collisionCheck(){

@@ -23,11 +23,11 @@ public:
 
     // getter and setter
     int getID() { return _id; }
-    void setPosition(double r, double theta);
-    void getPosition(double &r, double &theta);
+    void setPosition(double x, double y);
+    void getPosition(double &x, double &y);
     
-    void setVelocity(double vR, double vTheta);
-    void getVelocity(double &vR, double &vTheta);
+    void setVelocity(double vX, double vY);
+    void getVelocity(double &vX, double &vY);
 
     double getSize();
 
@@ -43,9 +43,8 @@ public:
 protected:
     ObjectType _type;                 // identifies the class type
     int _id;                          // every orbit object has its own unique id
-    double _posR, _posTheta;          // orbit position in polars
-    double _E, _h;                     //Energy + angular momentum
-
+    double _posX, _posY;             // orbit position 
+    double _vX, _vY;                  //Velocity
     double _Size;
 
 private:
