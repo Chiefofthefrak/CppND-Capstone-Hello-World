@@ -38,7 +38,7 @@ void Game::Update(){
 	}
 
 	for(auto &orbitItem : orbitPointers){ //Loop thru vector of pointers to orbitObjects and run orbit on each
-		threads.emplace_back(std::thread(&OrbitObject::Orbit, &orbitItem)); 
+		threads.emplace_back(&OrbitObject::Orbit, orbitItem); 
 	}
 
     std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
