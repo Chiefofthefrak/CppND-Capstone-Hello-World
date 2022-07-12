@@ -13,7 +13,7 @@ find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIRS})
 
 
-file(GLOB project_SRCS temp/*.cpp) #temp/*.h
+file(GLOB project_SRCS src/*.cpp) #src/*.h
 
 # Add project executable
 add_executable(OrbitGame ${project_SRCS})
