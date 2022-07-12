@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <thread>
+#include <iterator>
 
 #include <SDL.h>
 
@@ -42,7 +43,7 @@ void Game::Update(){
     std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
         t.join();
     });
-    std::cout << threads[0] << " Still Running " << std::endl;
+    std::cout << threads.begin() << " Still Running " << std::endl;
 
     if(LightFired()){ //TODO: Update Light Position
 

@@ -15,7 +15,7 @@ public:
     ~Game();
 
     // getter and setter
-    std::vector<std::shared_ptr<OrbitObject>> getOrbiters();
+    std::vector<std::unique_ptr<OrbitObject>> getOrbiters();
     bool LightFired();
 
     // typical behaviour methods
