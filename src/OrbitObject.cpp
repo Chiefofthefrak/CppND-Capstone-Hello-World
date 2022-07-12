@@ -42,68 +42,6 @@ OrbitObject::~OrbitObject()
     });
 }
 
-OrbitObject::OrbitObject(const OrbitObject &source){
-    _type = source._type;               
-    _id = _idCnt++;
-    _posR = source._posR;
-    _posTheta = source._posTheta; 
-    _E  = source._E;
-    _h = source._h;
-    _Size =source._Size;
-
-
-}
-
-OrbitObject& OrbitObject::operator=(const OrbitObject &source){
-        if (this == &source){
-        return *this;
-    }
-    _type = source._type;               
-    _id = _idCnt++;
-    _posR = source._posR;
-    _posTheta = source._posTheta; 
-    _E  = source._E;
-    _h = source._h;
-    _Size =source._Size;
-}
-
-OrbitObject::OrbitObject(OrbitObject &&source){
-    _type = source._type;               
-    _id = source._id;
-    _posR = source._posR;
-    _posTheta = source._posTheta; 
-    _E  = source._E;
-    _h = source._h;
-    _Size =source._Size;
-
-    source._type = nullptr;
-    source._id = nullptr;
-    source._posR = nullptr;
-    source._posTheta = nullptr;
-    source._E = nullptr;
-    source._h = nullptr;
-    source._Size = nullptr;
-}
-
-OrbitObject& OrbitObject::operator=(OrbitObject &&source){
-    _type = source._type;               
-    _id = source._id
-    _posR = source._posR;
-    _posTheta = source._posTheta; 
-    _E  = source._E;
-    _h = source._h;
-    _Size = source._Size;
-
-    source._type = nullptr;
-    source._id = nullptr;
-    source._posR = nullptr;
-    source._posTheta = nullptr;
-    source._E = nullptr;
-    source._h = nullptr;
-    source._Size = nullptr;
-
-    return *this;
-}
 
 double OrbitObject::getSize() //returns the radius of the object
 {

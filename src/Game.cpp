@@ -3,6 +3,7 @@
 #include <vector>
 #include <thread>
 #include <iterator>
+#include <algorithm>
 
 #include <SDL.h>
 
@@ -27,8 +28,8 @@ Game::Game(){
 
 void Game::Update(){
 
-	double mouseX, mouseY;
-	bool mousePressed = false;
+	int mouseX, mouseY;
+	bool mousePressed;
 
 	readInput(mouseX, mouseY, mousePressed);
 	if (mousePressed == true){
@@ -36,20 +37,20 @@ void Game::Update(){
 
 	}
 
-	for(auto orbitItem : &orbitPointers){
-		threads.emplace_back(std::thread(&OrbitObject::Orbit, orbitItem)); 
+	for(auto &orbitItem : orbitPointers){ //Loop thru vector of pointers to orbitObjects and run orbit on each
+		threads.emplace_back(std::thread(&OrbitObject::Orbit, &orbitItem)); 
 	}
 
     std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
         t.join();
     });
-    std::cout << threads.begin() << " Still Running " << std::endl;
+    std::cout << "Threads empty? " << threads.empty() << std::endl;
 
     if(LightFired()){ //TODO: Update Light Position
 
     }
 }
-void Game::readInput(double &mouseX, double &mouseY, bool &mousePressed){ //Track Mouse and determine when it's pressed
+void Game::readInput(int &mouseX, int &mouseY, bool &mousePressed){ //Track Mouse and determine when it's pressed
 
 	SDL_PumpEvents();  // make sure we have the latest mouse state.
 	auto buttons = SDL_GetMouseState(&mouseX, &mouseY);

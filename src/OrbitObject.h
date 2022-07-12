@@ -20,11 +20,7 @@ public:
     OrbitObject(double size, ObjectType type, double posR, double posTheta, double E, double h);
     ~OrbitObject();
     //Copy and move Operators
-    OrbitObject(const OrbitObject &source);
-    OrbitObject& operator=(const OrbitObject &source); // copy assignment operator
 
-    OrbitObject(OrbitObject &&source); // move constructor
-    OrbitObject& operator=(OrbitObject &&source);
 
     // getter and setter
     int getID() { return _id; }
