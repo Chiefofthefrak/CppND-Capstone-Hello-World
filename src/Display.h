@@ -2,7 +2,7 @@
 #define DISPLAY_H
 
 #include <vector>
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 #include "OrbitObject.h"
 #include "Game.h"

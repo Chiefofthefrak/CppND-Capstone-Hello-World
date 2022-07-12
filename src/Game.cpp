@@ -5,7 +5,7 @@
 #include <iterator>
 #include <algorithm>
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 #include "Game.h"
 #include "OrbitObject.h"
@@ -24,6 +24,12 @@ Game::Game(){
 
 
 }
+Game::~Game(){
+	    // set up thread barrier before this object is destroyed
+    /*std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
+        t.join();
+    });*/
+}
 
 
 void Game::Update(){
@@ -38,13 +44,14 @@ void Game::Update(){
 	}
 
 	for(auto &orbitItem : orbitPointers){ //Loop thru vector of pointers to orbitObjects and run orbit on each
-		threads.emplace_back(&OrbitObject::Orbit, orbitItem); 
+		orbitItem->Orbit();
+		//threads.emplace_back(&OrbitObject::Orbit, orbitItem); 
 	}
 
-    std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
+   /* std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
         t.join();
     });
-    std::cout << "Threads empty? " << threads.empty() << std::endl;
+    std::cout << "Threads empty? " << threads.empty() << std::endl;*/
 
     if(LightFired()){ //TODO: Update Light Position
 

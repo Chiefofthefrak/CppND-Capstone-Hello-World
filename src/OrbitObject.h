@@ -2,8 +2,6 @@
 #define ORBITOBJECT_H
 
 #include <vector>
-#include <thread>
-#include <mutex>
 #include <memory>
 
 enum ObjectType
@@ -18,8 +16,9 @@ class OrbitObject
 public:
     // constructor / desctructor
     OrbitObject(double size, ObjectType type, double posR, double posTheta, double E, double h);
-    ~OrbitObject();
+
     //Copy and move Operators
+    OrbitObject(OrbitObject &&) = default;
 
 
     // getter and setter
@@ -37,7 +36,6 @@ public:
     void setType(ObjectType newType) {_type = newType;}
 
     // typical behaviour methods
-    void Simulate();
     void Orbit();
     bool collisionCheck();
 
@@ -49,8 +47,7 @@ protected:
     int _id;                          // every orbit object has its own unique id
     double _posR, _posTheta;          // orbit position in polars
     double _E, _h;                     //Energy + angular momentum
-    std::vector<std::thread> threads; // holds all threads that have been launched within this object
-    static std::mutex _mtx;           // mutex shared by all orbit objects for protecting cout 
+
     double _Size;
 
 private:

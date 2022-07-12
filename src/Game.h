@@ -32,7 +32,7 @@ protected:
 
         bool lightFired = false;
         std::vector<std::shared_ptr<OrbitObject>> orbitPointers; //Holds a vector of all orbitObjects made by the game
-        std::vector<std::thread> threads; // holds all threads that have been launched within this game
+       // std::vector<std::thread> threads; // holds all threads that have been launched within this game
     };
 
 #endif

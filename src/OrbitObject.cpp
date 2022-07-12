@@ -6,7 +6,6 @@
 // init static variable
 int OrbitObject::_idCnt = 0;
 
-std::mutex OrbitObject::_mtx;
 
 void OrbitObject::setPosition(double r, double theta)
 {
@@ -31,14 +30,6 @@ OrbitObject::OrbitObject(double size, ObjectType type, double posR, double posTh
 {
 
     _id = _idCnt++;
-}
-
-OrbitObject::~OrbitObject()
-{
-    // set up thread barrier before this object is destroyed
-    std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
-        t.join();
-    });
 }
 
 
