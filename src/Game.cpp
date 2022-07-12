@@ -15,12 +15,12 @@ Game::Game(int screenwidth, int screenheight){
 
 	//Make 3 New Asteroids and a Target and Player object with specified sizes and put them in the vector orbitPointers
 
-	orbitPointers.push_back(std::make_shared<OrbitObject>(10, asteroid, screenwidth/4, screenheight/4,1,1));
-	orbitPointers.push_back(std::make_shared<OrbitObject>(30, asteroid,screenwidth/8, screenheight/8,2,2));
-	orbitPointers.push_back(std::make_shared<OrbitObject>(50, asteroid,3*screenwidth/4, 3*screenheight/4,1,1));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(10, asteroid, screenwidth/4, 0,1,100));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(30, asteroid,-screenwidth/3, 0,2,130));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(50, asteroid,3*screenwidth/4, 0,1,110));
 
-	orbitPointers.push_back(std::make_shared<OrbitObject>(20, target, 7*screenwidth/8, 7*screenheight/8,1,1));
-	orbitPointers.push_back(std::make_shared<OrbitObject>(20, player,3*screenwidth/8, 7*screenheight/8,1,1));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(20, target, -screenwidth/2, 0,1,120));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(20, player, screenwidth/3, 0,1,80));
 
 
 }

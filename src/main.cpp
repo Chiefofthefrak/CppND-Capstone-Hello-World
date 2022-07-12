@@ -23,7 +23,7 @@ int main(){
 	Game game(screenwidth,screenheight);
 	Display display(screenwidth,screenheight);
 
-	int frameNumber = 0;
+	
 	while (true) {
 	    frame_start = SDL_GetTicks(); // Current time in milliseconds
 	    game.Update();
@@ -35,8 +35,7 @@ int main(){
 	    if (frame_duration < target_frame_duration) {
 	      SDL_Delay(target_frame_duration - frame_duration);
 	    }
-	    frameNumber++;
-	    std::cout << "Frame Number: " <<  frameNumber << std::endl;
+
 	}
 
 return 0;

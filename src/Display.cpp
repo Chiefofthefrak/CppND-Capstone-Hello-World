@@ -49,14 +49,22 @@ void Display::Render(Game game){
 		Orbiter->getPosition(r,theta);
 		orbiterPosX = r*std::cos(theta) + p_width/2;
 		orbiterPosY = r*std::sin(theta) + p_height/2;
-
-		if (Orbiter->getType() != ObjectType::asteroid){
-			SDL_SetRenderDrawColor(sdl_renderer, 0x4B, 0x4B,0x4B, 0xFF);
-			DrawCircle(orbiterPosX, orbiterPosY, radius);
-		}
-		else{
-			SDL_SetRenderDrawColor(sdl_renderer, 0xAF, 0xAF,0xAF, 0xFF);
-			DrawCircle(orbiterPosX, orbiterPosY, radius);
+		switch(Orbiter->getType()){
+			case ObjectType::player:
+				SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x4B,0xFF, 0xFF);
+				DrawCircle(orbiterPosX, orbiterPosY, radius);
+				break;
+			
+			case ObjectType::target:
+				SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00,0x00, 0xFF);
+				DrawCircle(orbiterPosX, orbiterPosY, radius);
+				break;
+			
+			default:
+				SDL_SetRenderDrawColor(sdl_renderer, 0xAF, 0xAF,0xAF, 0xFF);
+				DrawCircle(orbiterPosX, orbiterPosY, radius);
+				break;
+			
 		}
 	}
 
