@@ -14,7 +14,7 @@
  {
  public:
  	// constructor / desctructor
- 	Display(const char* p_title, int p_width, int p_height);
+ 	Display(int p_width, int p_height);
     ~Display();  
 
     //Typical Behaviour methods

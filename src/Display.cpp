@@ -43,9 +43,11 @@ void Display::Render(Game game){
 
 	for(auto &Orbiter : orbitersToRender){ //TODO: Change depending on what type of pointer is in orbitPointers
 		auto radius = Orbiter->getSize();
-		if (Orbiter->_type != ObjectType::asteroid)
+
+		if (Orbiter->getType() != ObjectType::asteroid){
 			SDL_SetRenderDrawColor(sdl_renderer, 0x4B, 0x4B,0x4B, 0xFF);
 			DrawCircle(Orbiter->_posX, Orbiter->_posY, radius);
+		}
 		else{
 			SDL_SetRenderDrawColor(sdl_renderer, 0xAF, 0xAF,0xAF, 0xFF);
 			DrawCircle(Orbiter->_posX, Orbiter->_posY, radius);
