@@ -15,7 +15,7 @@ Game::Game(){
 
 	orbitPointers.push_back(std::make_unique<OrbitObject>(10, asteroid,50,50,10,10));
 	orbitPointers.push_back(std::make_unique<OrbitObject>(30, asteroid,100,100,15,15));
-	orbitPointers.push_back(std::make_unique<OrbitObject>(50, asteroid),-50,-50,10,10);
+	orbitPointers.push_back(std::make_unique<OrbitObject>(50, asteroid,-50,-50,10,10));
 
 	orbitPointers.push_back(std::make_unique<OrbitObject>(20, target,-100,-100,15,15));
 	orbitPointers.push_back(std::make_unique<OrbitObject>(20, player,200,200,15,15));
@@ -29,13 +29,13 @@ void Game::Update(){
 	double mouseX, mouseY;
 	bool mousePressed = false;
 
-	readInput(&mouseX, &mouseY, &mousePressed);
+	readInput(mouseX, mouseY, mousePressed);
 	if (mousePressed == true){
 		lightFired = true;
 
 	}
 
-	for(auto orbitItem : orbitPointers){
+	for(auto orbitItem : &orbitPointers){
 		threads.emplace_back(std::thread(&OrbitObject::Orbit, orbitItem)); 
 	}
 
