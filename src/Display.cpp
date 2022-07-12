@@ -7,15 +7,15 @@
 #include "OrbitObject.h"
 #include "Game.h"
 
-Display::Display(const int p_width, const int p_height) : window(NULL), renderer(NULL), p_height(p_height), p_width(p_width)
+Display::Display(const int p_width, const int p_height) : sdl_window(NULL), sdl_renderer(NULL), p_height(p_height), p_width(p_width)
 {
-	sdl_window = SDL_CreateWindow(p_title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_width, p_height, SDL_WINDOW_SHOWN);
+	sdl_window = SDL_CreateWindow("OrbitGame", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_width, p_height, SDL_WINDOW_SHOWN);
 
 	if(sdl_window == NULL){
 		std::cout << "Window failed to initialise. Error: " << SDL_GetError() << std::endl;
 	}
 
-	sdl_renderer = SDL_CreateRenderer(window,-1, SDL_RENDERER_ACCELERATED);
+	sdl_renderer = SDL_CreateRenderer(sdl_swindow,-1, SDL_RENDERER_ACCELERATED);
 
 	if(sdl_renderer == NULL){
 		std::cout << "renderer failed to initialise. Error: " << SDL_GetError() << std::endl;
