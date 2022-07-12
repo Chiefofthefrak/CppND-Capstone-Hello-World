@@ -9,7 +9,7 @@
 
 int main(){
 	int screenwidth = 720;
-	int screenheight = 720
+	int screenheight = 720;
 
 	if(SDL_Init(SDL_INIT_VIDEO)>0){
 		std::cout << "SDL_INIT has Failed, ERROR: "<< SDL_GetError() << std::endl;
