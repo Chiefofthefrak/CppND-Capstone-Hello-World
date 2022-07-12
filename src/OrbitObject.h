@@ -15,7 +15,7 @@ class OrbitObject
 {
 public:
     // constructor / desctructor
-    OrbitObject(double size, ObjectType type, double posR, double posTheta, double E, double h);
+    OrbitObject(double size, ObjectType type, double _posX, double posY, double vX, double vY);
 
     //Copy and move Operators
     OrbitObject(OrbitObject &&) = default;

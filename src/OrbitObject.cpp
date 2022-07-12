@@ -30,7 +30,7 @@ void OrbitObject::setVelocity(double vX, double vY)
     _vX = vX;
     _vY = vY;
 }
-OrbitObject::OrbitObject(double size, ObjectType type, double posR, double posTheta, double E, double h) : _Size(size), _type(type), _posR(posR), _posTheta(posTheta), _E(E), _h(h)
+OrbitObject::OrbitObject(double size, ObjectType type, double posX, double posY, double vX, double vY) : _Size(size), _type(type), _posX(posX), _posY(posY), _vX(vX), _vY(vY)
 {
 
     _id = _idCnt++;
@@ -61,7 +61,7 @@ void OrbitObject::Orbit() //Updates positions and velocities using Eulers method
         if (x>=0){theta = pi/2;}
         if (x<0){theta = 3*pi/2;}
     }else{
-        theta = std::atan2(x/y);
+        theta = std::atan2(x,y);
     }
     double force = forceConstant/(x*x + y*y);
     x += vX;
