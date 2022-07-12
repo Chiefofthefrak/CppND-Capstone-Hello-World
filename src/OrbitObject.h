@@ -17,8 +17,14 @@ class OrbitObject
 {
 public:
     // constructor / desctructor
-    OrbitObject(double size);
+    OrbitObject(double size, ObjectType type, double posR, double posTheta, double E, double h);
     ~OrbitObject();
+    //Copy and move Operators
+    OrbitObject(const OrbitObject &source);
+    OrbitObject& operator=(const OrbitObject &source); // copy assignment operator
+
+    OrbitObject(OrbitObject &&source); // move constructor
+    OrbitObject& operator=(OrbitObject &&source);
 
     // getter and setter
     int getID() { return _id; }
@@ -32,6 +38,7 @@ public:
 
 
     ObjectType getType() { return _type; }
+    void setType(ObjectType newType) {_type = newType;}
 
     // typical behaviour methods
     void Simulate();
@@ -45,7 +52,7 @@ protected:
     ObjectType _type;                 // identifies the class type
     int _id;                          // every orbit object has its own unique id
     double _posR, _posTheta;          // orbit position in polars
-    double _velR, _velTheta;          // orbit speed in polars
+    double _E, _h;                     //Energy + angular momentum
     std::vector<std::thread> threads; // holds all threads that have been launched within this object
     static std::mutex _mtx;           // mutex shared by all orbit objects for protecting cout 
     double _Size;

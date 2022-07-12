@@ -1,6 +1,9 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
+#include <chrono>
+#include <sys/time.h>
+#include <ctime>
 
 #include "OrbitObject.h"
 #include "Display.h"
@@ -29,18 +32,15 @@ int main(int argc, char* argv[]){
 	Uint32 frame_duration;
 	float target_frame_duration = 1000/60; // milliseconds per frame at 60 frames per second.
 
-	Game mainGame = new Game();
-	Input mainInput = new Input();
-	Display mainDisplay = new Display();
+	Game game = new Game();
+	Display display = new Display();
 
 
 	while (true) {
-	    frame_start = GetCurrentTimeMS(); // Current time in milliseconds
-
-	    mainInput.receiveInput();
-	    mainGame.Update();
-	    mainDisplay.Render(mainGame);
-	    frame_end = GetCurrentTimeMS();
+	    frame_start = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count(); // Current time in milliseconds
+	    game.Update();
+	    display.Render(game);
+	    frame_end = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
 	    frame_duration = frame_end - frame_start;
 

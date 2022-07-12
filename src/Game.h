@@ -4,6 +4,7 @@
 #include <vector>
 #include <thread>
 #include <mutex>
+#include <memory>
 
 class Game
 {
@@ -18,7 +19,7 @@ public:
 
     // typical behaviour methods
     void Update();
-    void readInput();
+    void readInput(double &mouseX, double &mouseY, bool &mousePressed);
 
     // behaviour for specific actions
     void Win();
@@ -27,8 +28,10 @@ public:
    
 
 protected:
+    
         bool LightFired = false;
-        std::vector<std::shared_ptr<OrbitObject>> orbitPointers; //Holds a vector of all orbitObjects made by the game
+        std::vector<std::unique_ptr<OrbitObject>> orbitPointers; //Holds a vector of all orbitObjects made by the game
+        std::vector<std::thread> threads; // holds all threads that have been launched within this game
     };
 
 #endif

@@ -1,6 +1,6 @@
 #include <algorithm>
 #include <iostream>
-#include <chrono>
+#include <math>
 #include "OrbitObject.h"
 
 // init static variable
@@ -20,21 +20,17 @@ void OrbitObject::getPosition(double &r, double &theta)
     theta = _posTheta;
 }
 
-void OrbitObject::setVelocity(double vR, double vTheta)
+
+void OrbitObject::getVelocity(double &E, double &h)
 {
-    _velR = vR;
-    _velTheta = vTheta;
+    E = _E;
+    h = _h;
 }
 
-void OrbitObject::getVelocity(double &vR, double &vTheta)
+OrbitObject::OrbitObject(double size, ObjectType type, double posR, double posTheta, double E, double h) : _size(size), _type(type)
+_posR(posR), _posTheta(posTheta), _E(E), _h(h)
 {
-    vR = _velR;
-    vTheta = _velTheta;
-}
 
-OrbitObject::OrbitObject(double size = 0) : _size(size)
-{
-    _type = ObjectType::asteroid;
     _id = _idCnt++;
 }
 
@@ -46,30 +42,93 @@ OrbitObject::~OrbitObject()
     });
 }
 
-OrbitObject::getSize()
+OrbitObject::OrbitObject(const OrbitObject &source){
+    _type = source._type;               
+    _id = _idCnt++;
+    _posR = source._posR;
+    _posTheta = source._posTheta; 
+    _E  = source._E;
+    _h = source._h;
+    _Size =source._Size;
+
+
+}
+
+OrbitObject& OrbitObject::operator=(const OrbitObject &source){
+        if (this == &source){
+        return *this;
+    }
+    _type = source._type;               
+    _id = _idCnt++;
+    _posR = source._posR;
+    _posTheta = source._posTheta; 
+    _E  = source._E;
+    _h = source._h;
+    _Size =source._Size;
+}
+
+OrbitObject::OrbitObject(OrbitObject &&source){
+    _type = source._type;               
+    _id = source._id;
+    _posR = source._posR;
+    _posTheta = source._posTheta; 
+    _E  = source._E;
+    _h = source._h;
+    _Size =source._Size;
+
+    source._type = nullptr;
+    source._id = nullptr;
+    source._posR = nullptr;
+    source._posTheta = nullptr;
+    source._E = nullptr;
+    source._h = nullptr;
+    source._Size = nullptr;
+}
+
+OrbitObject& OrbitObject::operator=(OrbitObject &&source){
+    _type = source._type;               
+    _id = source._id
+    _posR = source._posR;
+    _posTheta = source._posTheta; 
+    _E  = source._E;
+    _h = source._h;
+    _Size = source._Size;
+
+    source._type = nullptr;
+    source._id = nullptr;
+    source._posR = nullptr;
+    source._posTheta = nullptr;
+    source._E = nullptr;
+    source._h = nullptr;
+    source._Size = nullptr;
+
+    return *this;
+}
+
+double OrbitObject::getSize() //returns the radius of the object
 {
     return _Size;
 }
 
-OrbitObject::Simulate()
-{
-    threads.emplace_back(std::thread(&OrbitObject::Orbit, this));
 
-}
-
-OrbitObject::Orbit()
+void OrbitObject::Orbit() //Updates positions and velocities using Eulers method with a timestep equal to 1000/60 mS
 {
     //Initialise variables
+    float target_frame_duration = 1000/60; // milliseconds per frame at 60 frames per second.
     bool hasCollided = collisionCheck();
 
     double r, theta, vR, vTheta;
     getPosition(r,theta);
-    getVelocity(vR,vTheta);
+    getVelocity(E,h);
 
-    //TODO: Implement velocity and position update using GR EOMs 
-    // Assume updating every frame which can be 1000/60 ms.
-    // In Game::Update() need to make sure close all the threads made in OrbitObject::Simulate()
+    //position update using GR EOMs 
+    //assume updating every frame which can be 1000/60 ms.
+    r += target_frame_duration*(std::sqrt(E-(1-(100/r))*(1+(h*h)/(r*r))));
+    theta += h/(r*r);
 
     setPosition(r,theta);
-    setVelocity(vR,vTheta);
+
+}
+bool OrbitObject::collisionCheck(){
+    return false;
 }
