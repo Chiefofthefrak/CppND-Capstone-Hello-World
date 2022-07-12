@@ -15,12 +15,12 @@ Game::Game(){
 
 	//Make 3 New Asteroids and a Target and Player object with specified sizes and put them in the vector orbitPointers
 
-	orbitPointers.push_back(std::make_unique<OrbitObject>(10, asteroid,50,50,10,10));
-	orbitPointers.push_back(std::make_unique<OrbitObject>(30, asteroid,100,100,15,15));
-	orbitPointers.push_back(std::make_unique<OrbitObject>(50, asteroid,-50,-50,10,10));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(10, asteroid,50,50,10,10));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(30, asteroid,100,100,15,15));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(50, asteroid,-50,-50,10,10));
 
-	orbitPointers.push_back(std::make_unique<OrbitObject>(20, target,-100,-100,15,15));
-	orbitPointers.push_back(std::make_unique<OrbitObject>(20, player,200,200,15,15));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(20, target,-100,-100,15,15));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(20, player,200,200,15,15));
 
 
 }
@@ -66,6 +66,6 @@ bool Game::LightFired(){ //Returns whether the light has been fired
 }
 
 
-std::vector<std::unique_ptr<OrbitObject>> Game::getOrbiters(){ //Returns the vector of pointers to all OrbitObjects in the game
+std::vector<std::shared_ptr<OrbitObject>> Game::getOrbiters(){ //Returns the vector of pointers to all OrbitObjects in the game
 	return orbitPointers;
 }
