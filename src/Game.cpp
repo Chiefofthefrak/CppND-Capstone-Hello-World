@@ -10,26 +10,26 @@
 #include "Game.h"
 #include "OrbitObject.h"
 
-Game::Game(){ 
+Game::Game(int screenwidth, int screenheight){ 
 
 
 	//Make 3 New Asteroids and a Target and Player object with specified sizes and put them in the vector orbitPointers
 
-	orbitPointers.push_back(std::make_shared<OrbitObject>(10, asteroid,50,50,10,10));
-	orbitPointers.push_back(std::make_shared<OrbitObject>(30, asteroid,100,100,15,15));
-	orbitPointers.push_back(std::make_shared<OrbitObject>(50, asteroid,-50,-50,10,10));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(10, asteroid, screenwidth/4, screenheight/4,100,100));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(30, asteroid,screenwidth/8, screenheight/8,150,150));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(50, asteroid,3*screenwidth/4, 3*screenheight/4,100,100));
 
-	orbitPointers.push_back(std::make_shared<OrbitObject>(20, target,-100,-100,15,15));
-	orbitPointers.push_back(std::make_shared<OrbitObject>(20, player,200,200,15,15));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(20, target, 7*screenwidth/8, 7*screenheight/8,150,150));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(20, player,3*screenwidth/8, 7*screenheight/8,150,150));
 
 
 }
-Game::~Game(){
+/*Game::~Game(){
 	    // set up thread barrier before this object is destroyed
-    /*std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
+    std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
         t.join();
-    });*/
-}
+    });
+}*/
 
 
 void Game::Update(){

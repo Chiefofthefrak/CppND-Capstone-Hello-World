@@ -8,6 +8,8 @@
 
 
 int main(){
+	int screenwidth = 720;
+	int screenheight = 720
 
 	if(SDL_Init(SDL_INIT_VIDEO)>0){
 		std::cout << "SDL_INIT has Failed, ERROR: "<< SDL_GetError() << std::endl;
@@ -25,8 +27,8 @@ int main(){
 	Uint32 frame_duration;
 	int target_frame_duration = 17; // milliseconds per frame at 60 frames per second.
 
-	Game game;
-	Display display(1080,720);
+	Game game(screenwidth,screenheight);
+	Display display(screenwidth,screenheight);
 
 
 	while (true) {

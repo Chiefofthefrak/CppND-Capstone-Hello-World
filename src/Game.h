@@ -11,8 +11,8 @@ class Game
 {
 public:
     // constructor / desctructor
-    Game();
-    ~Game();
+    Game(int screenwidth, int screenheight);
+   // ~Game();
 
     // getter and setter
     std::vector<std::shared_ptr<OrbitObject>> getOrbiters();
