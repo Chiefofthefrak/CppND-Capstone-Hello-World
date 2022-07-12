@@ -28,7 +28,7 @@ void Game::Update(){
 
 	readInput(&mouseX, &mouseY, &mousePressed);
 	if (mousePressed == true){
-		LightFired = true;
+		lightFired = true;
 
 	}
 
@@ -57,7 +57,7 @@ void Game::readInput(double &mouseX, double &mouseY, bool &mousePressed){ //Trac
 }
 
 bool Game::LightFired(){ //Returns whether the light has been fired
-	return LightFired;
+	return lightFired;
 }
 
 

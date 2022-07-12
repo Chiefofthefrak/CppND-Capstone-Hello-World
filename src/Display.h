@@ -17,8 +17,8 @@
     ~Display();  
 
     //Typical Behaviour methods
-    Render(vector<OrbitObject> Orbiters);
-    DrawCircle(int centreX, int centreY, int radius); //Draw Circle using Midpoint Circle algorithm taken from https://stackoverflow.com/questions/38334081/howto-draw-circles-arcs-and-vector-graphics-in-sdl
+    void Render(Game game);
+    void DrawCircle(int centreX, int centreY, int radius); //Draw Circle using Midpoint Circle algorithm taken from https://stackoverflow.com/questions/38334081/howto-draw-circles-arcs-and-vector-graphics-in-sdl
  	
  private:
 	
@@ -30,3 +30,4 @@
  };
 
  
+#endif

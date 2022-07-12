@@ -60,5 +60,6 @@ protected:
 private:
     static int _idCnt; // global variable for counting object ids
     float target_frame_duration = 1000/60; // milliseconds per frame at 60 frames per second.
+};
 
 #endif

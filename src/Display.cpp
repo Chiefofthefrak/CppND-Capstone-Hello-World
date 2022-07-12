@@ -4,6 +4,7 @@
 
 
 #include "Display.h"
+#include "OrbitObject.h"
 #include "Game.h"
 
 Display::Display(const int p_width, const int p_height) : window(NULL), renderer(NULL), p_height(p_height), p_width(p_width)
@@ -52,13 +53,13 @@ void Display::Render(Game game){
 	}
 
 	// Render Light Ray
-	if(game.LightFired() == true){
+	/*if(game.LightFired() == true){
 		SDL_SetRenderDrawColor(sdl_renderer, 0xAF, 0x00,0x4E, 0xFF);
 		for(auto point : game.LightRay.previousPositions){ //TODO: Change depending on implementation of LightRay in Game
 			DrawCircle(point._posX, point._posY, p_width/100);
 		}
 
-	}
+	}*/
 	// Update Screen
   	SDL_RenderPresent(sdl_renderer);
 
