@@ -39,7 +39,7 @@ public:
     // typical behaviour methods
     void Simulate();
     void Orbit();
-    void collisionCheck();
+    bool collisionCheck();
 
 
     double _posX, _posY;              // orbit position in cartesians
