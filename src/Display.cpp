@@ -24,7 +24,7 @@ Display::Display(const int p_width, const int p_height) : window(NULL), renderer
 }
 
 Display::~Display(){
-	SDL_DestroyWindow(window);
+	SDL_DestroyWindow(sdl_window);
 	SDL_Quit();
 }
 

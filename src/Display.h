@@ -5,6 +5,7 @@
 #include <SDL.h>
 
 #include "OrbitObject.h"
+#include "Game.h"
 
 
 
