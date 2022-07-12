@@ -48,11 +48,14 @@ void OrbitObject::Orbit() //Updates positions and velocities using Eulers method
     double r, theta, E, h;
     getPosition(r,theta);
     getVelocity(E,h);
+    
 
     //position update using GR EOMs 
     //assume updating every frame which can be 1000/60 ms.
-    r += target_frame_duration*(std::sqrt(E-(1-(100/r))*(1+(h*h)/(r*r))))*std::sin(theta*20);
+    double a = (1-(100/r))*((r*r*r*r)/(h*h)+(r*r))/((r*r*r*r*E*E)/(h*h));
+    r += r*r*E*(1-a/2 - (a*a)/8-(a*a*a)/16);
     theta += h/(r*r);
+
 
     setPosition(r,theta);
 
