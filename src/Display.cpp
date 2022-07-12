@@ -45,10 +45,9 @@ void Display::Render(Game game){
 	for(auto &Orbiter : orbitersToRender){ //TODO: Change depending on what type of pointer is in orbitPointers
 		auto radius = Orbiter->getSize();
 
-		double r,theta;					//Convert Polars to cartesian
-		Orbiter->getPosition(r,theta);
-		orbiterPosX = r*std::cos(theta) + p_width/2;
-		orbiterPosY = r*std::sin(theta) + p_height/2;
+		Orbiter->getPosition(orbiterPosX,orbiterPosY);
+		orbiterPosX += p_width/2;
+		orbiterPosY += p_height/2;
 		switch(Orbiter->getType()){
 			case ObjectType::player:
 				SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x4B,0xFF, 0xFF);
