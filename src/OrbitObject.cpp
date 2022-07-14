@@ -54,23 +54,15 @@ void OrbitObject::Orbit() //Updates positions and velocities using Eulers method
     double x, y, vX, vY;
     getPosition(x,y);
     getVelocity(vX,vY);
-
-    double theta;
-    if (y==0){
-        if (x>=0){theta = pi/2;}
-        if (x<0){theta = 3*pi/2;}
-    }else{
-        theta = std::atan2(x,y);
-    }
-    double force = forceConstant/(x*x + y*y);
+    double r = std::sqrt(x*x + y*y);
+    double force = -1*forceConstant/(r*r);
     x += vX;
     y += vY;
-    vX += force* std::sin(theta);
-    vY += force* std::cos(theta);
-
+    vX += force *  (x/r);
+    vY += force *  (y/r);
     //position update using GR EOMs 
     //assume updating every frame which can be 1000/60 ms
-    if(getType == player){
+    if(getType() == player){
         std::cout << "Player velocity is " << vX << ", " << vY << std::endl;
     }
     setPosition(x,y);
