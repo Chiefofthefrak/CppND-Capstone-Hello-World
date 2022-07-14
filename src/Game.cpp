@@ -65,7 +65,7 @@ void Game::Update(){
 
 
     		//Add lightray to light pointers and Orbit in direction of mouse at 500 units total speed
-    		lightPointers.push_back(std::make_shared<LightRay>(3,light,orbitPosX,orbitPosY, (dx/std::abs(total))*1,(dy/std::abs(total))*1));
+    		lightPointers.push_back(std::make_shared<LightRay>(3,light,orbitPosX,orbitPosY, (dx/std::abs(total))*3,(dy/std::abs(total))*3));
     	}
     	for(auto &ray : lightPointers){ //Loop thru vector of pointers to lightRays and run orbit on each
 			ray->Orbit();
