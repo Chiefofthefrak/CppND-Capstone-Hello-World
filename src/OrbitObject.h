@@ -66,7 +66,11 @@ public:
     //Orbit with higher force constant and adding previous positions to vectors
     void Orbit();
 
-
+protected:
+    ObjectType _type;                 // identifies the class type
+    double _posX, _posY;             // orbit position 
+    double _vX, _vY;                  //Velocity
+    double _Size;
 };
 
 #endif
