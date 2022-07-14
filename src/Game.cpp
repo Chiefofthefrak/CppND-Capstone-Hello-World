@@ -16,12 +16,12 @@ Game::Game(int screenwidth, int screenheight){
 
 	//Make 3 New Asteroids and a Target and Player object with specified sizes and put them in the vector orbitPointers
 
-	orbitPointers.push_back(std::make_shared<OrbitObject>(10, asteroid, screenwidth/4, 0,0,1));
-	orbitPointers.push_back(std::make_shared<OrbitObject>(30, asteroid,-screenwidth/3, 0,0,-0.3));
-	orbitPointers.push_back(std::make_shared<OrbitObject>(50, asteroid,3*screenwidth/4, 0,0,0.5));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(15, asteroid, screenwidth/4, 0,0,1.7));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(30, asteroid,-screenwidth/3, 0,0,-1.4));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(40, asteroid,3*screenwidth/4, 0,0,0.95));
 
 	orbitPointers.push_back(std::make_shared<OrbitObject>(20, target, -screenwidth/2, 0,0,-1.2));
-	orbitPointers.push_back(std::make_shared<OrbitObject>(20, player, screenwidth/3, 0,0,0.8));
+	orbitPointers.push_back(std::make_shared<OrbitObject>(20, player, screenwidth/3, 0,0,1.45));
 
 
 }
@@ -65,7 +65,7 @@ void Game::Update(){
 
 
     		//Add lightray to light pointers and Orbit in direction of mouse at 500 units total speed
-    		lightPointers.push_back(std::make_shared<LightRay>(3,light,orbitPosX,orbitPosY, (dx/std::abs(total))*3,(dy/std::abs(total))*3));
+    		lightPointers.push_back(std::make_shared<LightRay>(3,light,orbitPosX,orbitPosY, (dx/std::abs(total)),(dy/std::abs(total))));
     	}
     	for(auto &ray : lightPointers){ //Loop thru vector of pointers to lightRays and run orbit on each
 			ray->Orbit();
