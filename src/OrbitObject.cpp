@@ -46,7 +46,7 @@ double OrbitObject::getSize() //returns the radius of the object
 void OrbitObject::Orbit() //Updates positions and velocities using Eulers method with a timestep equal to 1000/60 mS
 {
     double pi = 3.141592654;
-    double forceConstant = 100;
+    double forceConstant = 1000;
 
     //Initialise variables
     float target_frame_duration = 1000/60; // milliseconds per frame at 60 frames per second.
@@ -70,6 +70,9 @@ void OrbitObject::Orbit() //Updates positions and velocities using Eulers method
 
     //position update using GR EOMs 
     //assume updating every frame which can be 1000/60 ms
+    if(getType == player){
+        std::cout << "Player velocity is " << vX << ", " << vY << std::endl;
+    }
     setPosition(x,y);
     setVelocity(vX,vY);
 
@@ -82,7 +85,7 @@ LightRay::LightRay(double size, ObjectType type, double posX, double posY, doubl
 void LightRay::Orbit()
 {
     double pi = 3.141592654;
-    double forceConstant = 500;
+    double forceConstant = 3000;
 
     //Initialise variables
     float target_frame_duration = 1000/60; // milliseconds per frame at 60 frames per second.
