@@ -60,7 +60,7 @@ void Game::Update(){
     		double orbitPosX, orbitPosY;
     		orbitPointers.back()->getPosition(orbitPosX,orbitPosY);
     		double dy = (orbitPosY - 1.0*mouseY);
-    		double dx = (orbitPosX - 1.0*mouseX)
+    		double dx = (orbitPosX - 1.0*mouseX);
     		auto gradient =  dy/dx;
 
 

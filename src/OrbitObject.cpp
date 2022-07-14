@@ -74,6 +74,10 @@ void OrbitObject::Orbit() //Updates positions and velocities using Eulers method
     setVelocity(vX,vY);
 
 }
+LightRay::LightRay(double size, ObjectType type, double posX, double posY, double vX, double vY) : _Size(size), _type(type), _posX(posX), _posY(posY), _vX(vX), _vY(vY)
+{
+
+}
 
 void LightRay::Orbit()
 {

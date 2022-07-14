@@ -57,11 +57,13 @@ private:
 class LightRay : public OrbitObject
 {
 public:
+    //Constructor
+    LightRay(double size, ObjectType type, double _posX, double posY, double vX, double vY);
     //Previous Position of lightRay
     std::deque<double> previousXs;
     std::deque<double> previousYs; 
 
-    //Orbit with higher force constant
+    //Orbit with higher force constant and adding previous positions to vectors
     void Orbit();
 
 
