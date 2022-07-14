@@ -68,13 +68,13 @@ void Display::Render(Game game){
 	}
 
 	// Render Light Ray
-	/*if(game.LightFired() == true){
+	if(game.LightFired()){
 		SDL_SetRenderDrawColor(sdl_renderer, 0xAF, 0x00,0x4E, 0xFF);
-		for(auto point : game.LightRay.previousPositions){ //TODO: Change depending on implementation of LightRay in Game
-			DrawCircle(point._posX, point._posY, p_width/100);
+		for(int i = 0; i<= game.lightPointers.back()->previousXs.size(); i++ ){ //TODO: Change depending on implementation of LightRay in Game
+			DrawCircle(game.lightPointers.back()->previousXs[i], game.lightPointers.back()->previousYs[i], 5);
 		}
 
-	}*/
+	}
 	// Update Screen
   	SDL_RenderPresent(sdl_renderer);
 

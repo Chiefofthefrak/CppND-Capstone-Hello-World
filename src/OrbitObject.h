@@ -3,12 +3,14 @@
 
 #include <vector>
 #include <memory>
+#include <deque>
 
 enum ObjectType
 {
     asteroid,
     player,
-    target
+    target,
+    light
 };
 
 class OrbitObject
@@ -37,7 +39,7 @@ public:
 
     // typical behaviour methods
     void Orbit();
-    bool collisionCheck();
+
 
 
 protected:
@@ -50,6 +52,19 @@ protected:
 private:
     static int _idCnt; // global variable for counting object ids
     float target_frame_duration = 1000/60; // milliseconds per frame at 60 frames per second.
+};
+
+class LightRay : public OrbitObject
+{
+public:
+    //Previous Position of lightRay
+    std::deque<double> previousXs;
+    std::deque<double> previousYs; 
+
+    //Orbit with higher force constant
+    void Orbit();
+
+
 };
 
 #endif

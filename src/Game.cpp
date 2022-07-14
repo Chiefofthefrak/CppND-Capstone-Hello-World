@@ -4,6 +4,7 @@
 #include <thread>
 #include <iterator>
 #include <algorithm>
+#include <cmath>
 
 #include <SDL2/SDL.h>
 
@@ -38,7 +39,7 @@ void Game::Update(){
 	bool mousePressed;
 
 	readInput(mouseX, mouseY, mousePressed);
-	if (mousePressed == true){
+	if (mousePressed){
 		lightFired = true;
 
 	}
@@ -54,6 +55,22 @@ void Game::Update(){
     std::cout << "Threads empty? " << threads.empty() << std::endl;*/
 
     if(LightFired()){ //TODO: Update Light Position
+    	if(lightPointers.empty()){
+    		//Find direction to mouse position from player position
+    		double orbitPosX, orbitPosY;
+    		orbitPointers.back()->getPosition(orbitPosX,orbitPosY);
+    		double dy = (orbitPosY - 1.0*mouseY);
+    		double dx = (orbitPosX - 1.0*mouseX)
+    		auto gradient =  dy/dx;
+
+
+    		//Add lightray to light pointers and Orbit in direction of mouse at 500 units total speed
+    		lightPointers.push_back(std::make_shared<LightRay>(3,light,orbitPosX,orbitPosY, (500/std::abs(gradient))*dx,(500/std::abs(gradient))*dy));
+    	}
+    	for(auto &ray : lightPointers){ //Loop thru vector of pointers to lightRays and run orbit on each
+			ray->Orbit();
+		
+		}
 
     }
 }
