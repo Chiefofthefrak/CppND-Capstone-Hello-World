@@ -18,7 +18,7 @@ int main(){
 	Uint32 frame_start;
 	Uint32 frame_end;
 	Uint32 frame_duration;
-	int target_frame_duration = 100; // milliseconds per frame at 60 frames per second.
+	int target_frame_duration = 20; // milliseconds per frame at 60 frames per second.
 
 	Game game(screenwidth,screenheight);
 	Display display(screenwidth,screenheight);
