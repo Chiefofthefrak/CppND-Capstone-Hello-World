@@ -15,6 +15,7 @@ public:
    // ~Game();
 
     // getter and setter
+    std::vector<std::shared_ptr<LightRay>> getLightRay();
     std::vector<std::shared_ptr<OrbitObject>> getOrbiters();
     bool LightFired();
 

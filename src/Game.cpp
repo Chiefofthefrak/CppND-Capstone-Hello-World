@@ -93,3 +93,7 @@ bool Game::LightFired(){ //Returns whether the light has been fired
 std::vector<std::shared_ptr<OrbitObject>> Game::getOrbiters(){ //Returns the vector of pointers to all OrbitObjects in the game
 	return orbitPointers;
 }
+
+std::vector<std::shared_ptr<LightRay>> Game::getLightRay(){ //Returns the vector of pointers to LightRays
+	return lightPointers;
+}

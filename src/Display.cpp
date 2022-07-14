@@ -69,9 +69,10 @@ void Display::Render(Game game){
 
 	// Render Light Ray
 	if(game.LightFired()){
+		auto rayToRender = game.getLightRay();
 		SDL_SetRenderDrawColor(sdl_renderer, 0xAF, 0x00,0x4E, 0xFF);
-		for(int i = 0; i<= game.lightPointers.back()->previousXs.size(); i++ ){ //TODO: Change depending on implementation of LightRay in Game
-			DrawCircle(game.lightPointers.back()->previousXs[i], game.lightPointers.back()->previousYs[i], 5);
+		for(int i = 0; i<= rayToRender.back()->previousXs.size(); i++ ){ //TODO: Change depending on implementation of LightRay in Game
+			DrawCircle(rayToRender.back()->previousXs[i], rayToRender.back()->previousYs[i], 5);
 		}
 
 	}
