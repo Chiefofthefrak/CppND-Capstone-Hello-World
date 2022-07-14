@@ -54,7 +54,7 @@ private:
     float target_frame_duration = 1000/60; // milliseconds per frame at 60 frames per second.
 };
 
-class LightRay : public OrbitObject
+class LightRay 
 {
 public:
     //Constructor
@@ -62,6 +62,14 @@ public:
     //Previous Position of lightRay
     std::deque<double> previousXs;
     std::deque<double> previousYs; 
+
+
+    //Getters and Setters
+    void setPosition(double x, double y);
+    void getPosition(double &x, double &y);
+    
+    void setVelocity(double vX, double vY);
+    void getVelocity(double &vX, double &vY);
 
     //Orbit with higher force constant and adding previous positions to vectors
     void Orbit();

@@ -120,3 +120,27 @@ void LightRay::Orbit()
     setVelocity(vX,vY);
 
 }
+
+void LightRay::setPosition(double x, double y)
+{
+    _posX = x;
+    _posY = y;
+}
+
+void LightRay::getPosition(double &x, double &y)
+{
+    x = _posX;
+    y = _posY;
+}
+
+
+void LightRay::getVelocity(double &vX, double &vY)
+{
+    vX = _vX;
+    vY = _vY;
+}
+void LightRay::setVelocity(double vX, double vY)
+{
+    _vX = vX;
+    _vY = vY;
+}
