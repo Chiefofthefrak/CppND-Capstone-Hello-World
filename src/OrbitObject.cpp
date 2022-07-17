@@ -138,13 +138,13 @@ void LightRay::setVelocity(double vX, double vY)
     _vY = vY;
 }
 
-bool collisionCheck(const OrbitObject& object)
+bool LightRay::collisionCheck(const OrbitObject object)
 {
     double objectX, objectY, objectSize;
-    object->getPosition(objectX,objectY);
+    object.getPosition(objectX,objectY);
 
     double lightPosX, lightPosY;
-    this->getPosition(lightPosX,lightPosY);
+    getPosition(lightPosX,lightPosY);
 
     double dx = std::abs(lightPosX - objectX);
     double dy = std::abs(lightPosY - objectY);

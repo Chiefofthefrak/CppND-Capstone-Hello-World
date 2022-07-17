@@ -64,7 +64,7 @@ void Game::Update(){
     	for(auto &ray : lightPointers){ //Loop thru vector of pointers to lightRays and run orbit and collisioncheck
 			ray->Orbit();
 			for (auto &orbitItem : orbitPointers){
-				if (ray->collisionCheck(orbitItem)){ //Check if ray collided with any orbitItem and do something depending on what type they are
+				if (ray->collisionCheck(*orbitItem)){ //Check if ray collided with any orbitItem and do something depending on what type they are
 					switch (orbitItem->getType()){
 						case player:
 							Lose();

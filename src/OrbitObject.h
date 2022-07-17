@@ -19,9 +19,6 @@ public:
     // constructor / desctructor
     OrbitObject(double size, ObjectType type, double _posX, double posY, double vX, double vY);
 
-    //Copy and move Operators
-    OrbitObject(OrbitObject &&) = default;
-
 
     // getters and setters
     int getID() { return _id; }
@@ -74,7 +71,7 @@ public:
     //Orbit with higher force constant and adding previous positions to vectors
     void Orbit();
 
-    bool collisionCheck(const OrbitObject& object); //Checks if lightRay is within radius distance of an object
+    bool collisionCheck(const OrbitObject object); //Checks if lightRay is within radius distance of an object
 
 protected:
     ObjectType _type;                 // identifies the class type
