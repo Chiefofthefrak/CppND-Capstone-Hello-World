@@ -51,7 +51,7 @@ void Game::Update(){
     		double dy = (1.0*mouseY - 1.0*orbitPosY);
     		double dx = (1.0*mouseX - 1.0*orbitPosX);
     		auto total =  std::abs(std::sqrt( dx*dx + dy*dy));
-    		//std::cout << "dx, dy: " << dx << ", " << dy << " Mouse Position " << mouseX <<", " << mouseY <<std::endl;
+    		//std::cout << "dx, dy: " << dx << ", " << dy << " Mouse Position " << mouseX <<", " << mouseY << std::endl;
 
     		//Add lightray to light pointers and Orbit in direction of mouse at 8 units total speed from surface of player
     		lightPointers.push_back(std::make_shared<LightRay>(2,light,orbitPosX+(dx/(total))*20,orbitPosY + (dy/(total))*20, (dx/(total))*8,(dy/(total))*8));

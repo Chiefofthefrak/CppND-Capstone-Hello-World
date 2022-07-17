@@ -43,7 +43,7 @@ double OrbitObject::getSize() //returns the radius of the object
 }
 
 
-void OrbitObject::Orbit() //Updates positions and velocities using Eulers method and Newtonian physics
+void OrbitObject::Orbit() //Updates positions and velocities using Eulers method 
 {
     double pi = 3.141592654;
     double forceConstant = 1000;
@@ -143,7 +143,6 @@ bool LightRay::collisionCheck(OrbitObject object)
 
     double dx = std::abs(lightPosX - objectX);
     double dy = std::abs(lightPosY - objectY);
-    //std::cout << " CollisionCheck called with object at " << objectX << ", " << objectY << " radius = " << objectSize << " and light at " << lightPosX << ", " << lightPosY << std::endl;
 
     if(std::sqrt(dx*dx + dy*dy)<=objectSize){
         std::cout << "Ray has collided " << std::endl;
