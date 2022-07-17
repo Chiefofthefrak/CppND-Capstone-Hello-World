@@ -145,7 +145,7 @@ bool LightRay::collisionCheck(OrbitObject object)
     double dy = std::abs(lightPosY - objectY);
 
     if(std::sqrt(dx*dx + dy*dy)<=objectSize){
-        std::cout << "Ray has collided " << std::endl;
+       // std::cout << "Ray has collided " << std::endl;
         return true;
     }else{
         return false;

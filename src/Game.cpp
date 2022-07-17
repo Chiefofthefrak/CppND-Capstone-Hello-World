@@ -68,13 +68,16 @@ void Game::Update(){
 
 			for (auto &orbitItem : orbitPointers){
 				if (ray->collisionCheck(*orbitItem)){ //Check if ray collided with any orbitItem and do something depending on what type they are
+					std::cout << "Got to switch " << std::endl;
 					switch (orbitItem->getType()){	
 						case player:
 
 						case target:
 							Win();
+							std::cout << "Got to Win " << std::endl;
 						case asteroid://ray is absorbed by asteroid
 							ray->absorb();
+							
 							//std::cout << " Ray absorbed " << std::endl;					
 						} 
 				}

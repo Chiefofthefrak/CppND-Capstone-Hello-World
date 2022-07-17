@@ -95,7 +95,7 @@ void Display::Render(Game game){
 			double targetX, targetY, targetRadius;
 			orbitersToRender[3]->getPosition(targetX,targetY);
 			targetRadius = orbitersToRender[3]->getSize();
-
+			std::cout << "Got to rendering " << std::endl;
 
 			ClearScreen();
 			SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00,0x00, 0xFF);
