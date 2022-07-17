@@ -52,13 +52,13 @@ void Game::Update(){
     		//Find direction to mouse position from player position
     		double orbitPosX, orbitPosY;
     		orbitPointers.back()->getPosition(orbitPosX,orbitPosY);
-    		double dy = (orbitPosY - 1.0*mouseY);
-    		double dx = (orbitPosX - 1.0*mouseX);
+    		double dy = (1.0*mouseY - orbitPosY);
+    		double dx = (1.0*mouseX - orbitPosX);
     		auto total =  std::sqrt( dx*dx + dy*dy);
 
 
     		//Add lightray to light pointers and Orbit in direction of mouse at 500 units total speed
-    		lightPointers.push_back(std::make_shared<LightRay>(3,light,orbitPosX,orbitPosY, (dx/std::abs(total)),(dy/std::abs(total))));
+    		lightPointers.push_back(std::make_shared<LightRay>(2,light,orbitPosX,orbitPosY, (dx/std::abs(total)*1.5),(dy/std::abs(total))*1.5));
     	}
     	int lightPointerNumber = 0;
     	for(auto &ray : lightPointers){ //Loop thru vector of pointers to lightRays and run orbit and collisioncheck
@@ -72,7 +72,7 @@ void Game::Update(){
 							Win();
 						case asteroid://ray is absorbed by asteroid
 							lightPointers.erase(lightPointers.begin() + lightPointerNumber);
-					} 
+							std::cout << " Ray Erased " << std::endl;					} 
 				}
 			}
 			lightPointerNumber++;

@@ -43,7 +43,7 @@ double OrbitObject::getSize() //returns the radius of the object
 }
 
 
-void OrbitObject::Orbit() //Updates positions and velocities using Eulers method with a timestep equal to 1000/60 mS
+void OrbitObject::Orbit() //Updates positions and velocities using Eulers method 
 {
     double pi = 3.141592654;
     double forceConstant = 1000;
@@ -55,28 +55,26 @@ void OrbitObject::Orbit() //Updates positions and velocities using Eulers method
     getVelocity(vX,vY);
     double r = std::sqrt(x*x + y*y);
     double force = -1*forceConstant/(r*r);
+
+    //Update velocities and positions
     x += vX;
     y += vY;
     vX += force *  (x/r);
     vY += force *  (y/r);
-    //position update using GR EOMs 
-    //assume updating every frame which can be 1000/60 ms
-    if(getType() == player){
-        std::cout << "Player velocity is " << vX << ", " << vY << std::endl;
-    }
+
     setPosition(x,y);
     setVelocity(vX,vY);
 
 }
 LightRay::LightRay(double size, ObjectType type, double posX, double posY, double vX, double vY) : _Size(size), _type(type), _posX(posX), _posY(posY), _vX(vX), _vY(vY)
 {
-
+    std::cout << 
 }
 
-void LightRay::Orbit()
+void LightRay::Orbit() //Updates LightRay's position and adds to previous positions
 {
     double pi = 3.141592654;
-    double forceConstant = 2000;
+    double forceConstant = 1000;
 
     //Initialise variables
 
@@ -93,10 +91,6 @@ void LightRay::Orbit()
     vY += force *  (y/r);
 
 
-    /*if(getType() == player){
-        std::cout << "Player velocity is " << vX << ", " << vY << std::endl;
-    }*/
-    
     //Add positions to previous positions vector
     previousXs.push_back(x);
     previousYs.push_back(y);
@@ -138,7 +132,7 @@ void LightRay::setVelocity(double vX, double vY)
     _vY = vY;
 }
 
-bool LightRay::collisionCheck(const OrbitObject object)
+bool LightRay::collisionCheck(OrbitObject object)
 {
     double objectX, objectY, objectSize;
     object.getPosition(objectX,objectY);
@@ -149,7 +143,8 @@ bool LightRay::collisionCheck(const OrbitObject object)
     double dx = std::abs(lightPosX - objectX);
     double dy = std::abs(lightPosY - objectY);
 
-    if(dx < objectSize and dy < objectSize and std::sqrt(dx*dx + dy*dy) < objectSize){
+    if(dx <= objectSize and dy <= objectSize){
+        std::cout << "Ray has collided with "<< object.getType() << std::endl;
         return true;
     }else{
         return false;
