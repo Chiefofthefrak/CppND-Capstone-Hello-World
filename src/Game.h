@@ -18,8 +18,8 @@ public:
     std::vector<std::shared_ptr<LightRay>> getLightRay();
     std::vector<std::shared_ptr<OrbitObject>> getOrbiters();
     bool LightFired();
-    bool running();
-    bool gameWon();
+    bool Running();
+    bool GameWon();
 
     // typical behaviour methods
     void Update(); //Updates the game state for Orbiters and light etc

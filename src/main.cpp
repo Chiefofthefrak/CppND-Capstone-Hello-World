@@ -24,7 +24,7 @@ int main(){
 	Display display(screenwidth,screenheight);
 
 	
-	while (game.running()) {
+	while (game.Running()) {
 	    frame_start = SDL_GetTicks(); // Current time in milliseconds
 	    game.Update();
 	    display.Render(game);

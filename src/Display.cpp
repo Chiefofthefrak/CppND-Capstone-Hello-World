@@ -88,8 +88,8 @@ void Display::Render(Game game){
   	SDL_RenderPresent(sdl_renderer);
 
   	//Present End Screen if won or lost
- 	if (!game.running()){
-		if(game.gameWon()){ //target object explodes followed by black screen and win message
+ 	if (!game.Running()){
+		if(game.GameWon()){ //target object explodes followed by black screen and win message
 			double targetX, targetY, targetRadius;
 			orbitersToRender[-2]->getPosition(targetX,targetY);
 			targetRadius = orbitersToRender[-2]->getSize();

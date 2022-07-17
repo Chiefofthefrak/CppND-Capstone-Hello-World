@@ -113,9 +113,9 @@ void Game::Lose(){
 	gameWon = false;
 
 }
-bool Game::running(){
+bool Game::Running(){
 	return running;
 }
-bool Game::gameWon(){
+bool Game::GameWon(){
 	return gameWon;
 }
