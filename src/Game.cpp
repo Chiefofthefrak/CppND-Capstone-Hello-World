@@ -11,7 +11,8 @@
 #include "Game.h"
 #include "OrbitObject.h"
 
-Game::Game(int screenwidth, int screenheight){ 
+Game::Game(int screenwidth, int screenheight): screenwidth(screenwidth), screenheight(screenheight)
+{ 
 
 
 	//Make 3 New Asteroids and a Target and Player object with specified sizes and put them in the vector orbitPointers
@@ -108,7 +109,6 @@ std::vector<std::shared_ptr<LightRay>> Game::getLightRay(){ //Returns the vector
 
 void Game::Win(){
 	running = false;
-	gameWon = true;
 
 }
 bool Game::Running(){

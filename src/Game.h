@@ -12,7 +12,6 @@ class Game
 public:
     // constructor / desctructor
     Game(int screenwidth, int screenheight);
-   // ~Game();
 
     // getter and setter
     std::vector<std::shared_ptr<LightRay>> getLightRay();
@@ -32,6 +31,7 @@ public:
 
 protected:
 
+        int screenwidth, screenheight;
         bool running = true;
         bool lightFired = false;
         std::vector<std::shared_ptr<OrbitObject>> orbitPointers; //Holds a vector of all orbitObjects made by the game
