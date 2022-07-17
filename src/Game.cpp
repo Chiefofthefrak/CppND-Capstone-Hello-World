@@ -47,7 +47,7 @@ void Game::Update(){
     	if(mousePressed and lightPointers.size() <= 20){
     		//Find direction to mouse position from player position
     		double orbitPosX, orbitPosY;
-    		orbitPointers[-1]->getPosition(orbitPosX,orbitPosY);
+    		orbitPointers.back()->getPosition(orbitPosX,orbitPosY);
     		double dy = (1.0*mouseY - 1.0*orbitPosY);
     		double dx = (1.0*mouseX - 1.0*orbitPosX);
     		auto total =  std::abs(std::sqrt( dx*dx + dy*dy));
@@ -88,8 +88,8 @@ void Game::readInput(int &mouseX, int &mouseY, bool &mousePressed){ //Track Mous
 
 	SDL_PumpEvents();  // make sure we have the latest mouse state.
 	auto buttons = SDL_GetMouseState(&mouseX, &mouseY);
-	mouseX += screenwidth/2;
-	mouseY += screenheight/2;
+	mouseX -= screenwidth/2;
+	mouseY -= screenheight/2;
 	if ((buttons & SDL_BUTTON_LMASK) != 0) {
 		mousePressed = true;
 	}	
