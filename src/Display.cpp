@@ -93,31 +93,17 @@ void Display::Render(Game game){
   	//Present End Screen if won 
  	if (!game.Running()){ //target object explodes followed by black screen and win message
 			double targetX, targetY, targetRadius;
-			orbitersToRender[-2]->getPosition(targetX,targetY);
-			targetRadius = orbitersToRender[-2]->getSize();
+			orbitersToRender[3]->getPosition(targetX,targetY);
+			targetRadius = orbitersToRender[3]->getSize();
 
+
+			ClearScreen();
 			SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00,0x00, 0xFF);
-			DrawCircle(targetX,targetY,targetRadius + 3);
-			SDL_RenderPresent(sdl_renderer);
-			SDL_Delay(50);
-
-			ClearScreen();
-			SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00,0x00, 0xEE);
-			DrawCircle(targetX,targetY,targetRadius + 3);
-			DrawCircle(targetX,targetY,targetRadius + 10);
-			SDL_RenderPresent(sdl_renderer);
-			SDL_Delay(100);
-
-			ClearScreen();
-			SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00,0x00, 0xCC);
 			DrawCircle(targetX,targetY,targetRadius + 10);
 			DrawCircle(targetX,targetY,targetRadius + 20);
+			DrawCircle(targetX,targetY,targetRadius + 30);
 			SDL_RenderPresent(sdl_renderer);
-			SDL_Delay(200);
-
-			SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x00,0x00, 0xFF);
-			SDL_RenderClear(sdl_renderer);
-			SDL_RenderPresent(sdl_renderer);
+			SDL_Delay(300);
 			std::cout << "You Win! " << std::endl;
 	} 	
 
