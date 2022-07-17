@@ -28,7 +28,7 @@ Display::~Display(){
 	SDL_DestroyWindow(sdl_window);
 	SDL_Quit();
 }
-void ClearScreen(){
+void Display::ClearScreen(){
 	//Clear Screen
 	SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x00,0x26, 0xFF);
 	SDL_RenderClear(sdl_renderer);

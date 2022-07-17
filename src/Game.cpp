@@ -60,20 +60,22 @@ void Game::Update(){
     		//Add lightray to light pointers and Orbit in direction of mouse at 500 units total speed
     		lightPointers.push_back(std::make_shared<LightRay>(3,light,orbitPosX,orbitPosY, (dx/std::abs(total)),(dy/std::abs(total))));
     	}
+    	int lightPointerNumber = 0;
     	for(auto &ray : lightPointers){ //Loop thru vector of pointers to lightRays and run orbit and collisioncheck
 			ray->Orbit();
 			for (auto &orbitItem : orbitPointers){
 				if (ray->collisionCheck(orbitItem)){ //Check if ray collided with any orbitItem and do something depending on what type they are
-					switch orbitItem->getType()
+					switch (orbitItem->getType()){
 						case player:
 							Lose();
 						case target:
 							Win();
-						case asteroid:
-							lightPointers.erase(std::find(ray)); //ray is absorbed by asteroid
+						case asteroid://ray is absorbed by asteroid
+							lightPointers.erase(lightPointers.begin() + lightPointerNumber);
+					} 
 				}
 			}
-		
+			lightPointerNumber++;
 		}
 
     }

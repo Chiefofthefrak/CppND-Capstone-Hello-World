@@ -74,7 +74,7 @@ public:
     //Orbit with higher force constant and adding previous positions to vectors
     void Orbit();
 
-    bool collisionCheck(OrbitObject object); //Checks if lightRay is within radius distance of an object
+    bool collisionCheck(const OrbitObject& object); //Checks if lightRay is within radius distance of an object
 
 protected:
     ObjectType _type;                 // identifies the class type
