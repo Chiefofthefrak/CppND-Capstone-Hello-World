@@ -43,7 +43,7 @@ double OrbitObject::getSize() //returns the radius of the object
 }
 
 
-void OrbitObject::Orbit() //Updates positions and velocities using Eulers method 
+void OrbitObject::Orbit() //Updates positions and velocities using Eulers method and Newtonian physics
 {
     double pi = 3.141592654;
     double forceConstant = 1000;
