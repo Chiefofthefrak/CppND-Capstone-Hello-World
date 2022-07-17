@@ -83,7 +83,9 @@ protected:
     double _vX, _vY;                  //Velocity
     double _Size;                     //Radius
 
-    int colourR, colourG, colourB; //RGB colour of the ray
+    int colourR = 150; //RGB colour of the ray
+    int colourG = 20;
+    int colourB = 150;
 };
 
 #endif

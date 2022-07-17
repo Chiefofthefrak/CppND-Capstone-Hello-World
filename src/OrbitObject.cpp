@@ -101,7 +101,7 @@ void LightRay::Orbit() //Updates LightRay's position and adds to previous positi
     }
 
     setPosition(x,y);
-    setVelocity(vX,vY);
+    setVelocity(vX/1.01,vY/1.01);
 
 
 
@@ -143,9 +143,9 @@ bool LightRay::collisionCheck(OrbitObject object)
 
     double dx = std::abs(lightPosX - objectX);
     double dy = std::abs(lightPosY - objectY);
-    std::cout << " CollisionCheck called with object at " << objectX << ", " << objectY << " radius = " << objectSize << " and light at " << lightPosX << ", " << lightPosY << std::endl;
+    //std::cout << " CollisionCheck called with object at " << objectX << ", " << objectY << " radius = " << objectSize << " and light at " << lightPosX << ", " << lightPosY << std::endl;
 
-    if(dx <= objectSize and dy <= objectSize){
+    if(std::sqrt(dx*dx + dy*dy)<=objectSize){
         std::cout << "Ray has collided " << std::endl;
         return true;
     }else{
@@ -154,7 +154,7 @@ bool LightRay::collisionCheck(OrbitObject object)
 }
 void LightRay::absorb(){
     setPosition(0,0);
-    setVelocity(0.0);
+    setVelocity(0,0);
     setColour(0,0,0);
 }
 void LightRay::setColour(int r, int g, int b){
