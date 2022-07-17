@@ -28,62 +28,134 @@ Display::~Display(){
 	SDL_DestroyWindow(sdl_window);
 	SDL_Quit();
 }
-
-void Display::Render(Game game){
-
+void ClearScreen(){
 	//Clear Screen
 	SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x00,0x26, 0xFF);
 	SDL_RenderClear(sdl_renderer);
 
 	// Render Central BH
 	SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x00,0x00, 0xFF);
-	DrawCircle(p_width/2, p_height/2, p_width/8);
+	DrawDisk(p_width/2, p_height/2, p_width/8);
+}
+
+void Display::Render(Game game){
+
+	ClearScreen();
 
 	// Render Orbiters
 	auto orbitersToRender = game.getOrbiters();
 	double orbiterPosX, orbiterPosY;
-	for(auto &Orbiter : orbitersToRender){ //TODO: Change depending on what type of pointer is in orbitPointers
+	for(auto &Orbiter : orbitersToRender){ //Render depending on what objectType Orbiter is
 		auto radius = Orbiter->getSize();
 
 		Orbiter->getPosition(orbiterPosX,orbiterPosY);
 		orbiterPosX += p_width/2;
 		orbiterPosY += p_height/2;
+
 		switch(Orbiter->getType()){
 			case ObjectType::player:
 				SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x4B,0xFF, 0xFF);
-				DrawCircle(orbiterPosX, orbiterPosY, radius);
+				DrawDisk(orbiterPosX, orbiterPosY, radius);
 				break;
 			
 			case ObjectType::target:
 				SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00,0x00, 0xFF);
-				DrawCircle(orbiterPosX, orbiterPosY, radius);
+				DrawDisk(orbiterPosX, orbiterPosY, radius);
 				break;
 			
 			default:
 				SDL_SetRenderDrawColor(sdl_renderer, 0xAF, 0xAF,0xAF, 0xFF);
-				DrawCircle(orbiterPosX, orbiterPosY, radius);
+				DrawDisk(orbiterPosX, orbiterPosY, radius);
 				break;
 			
 		}
+
 	}
 
 	// Render Light Ray
 	if(game.LightFired()){
-		auto rayToRender = game.getLightRay();
+		auto raysToRender = game.getLightRay();
 		SDL_SetRenderDrawColor(sdl_renderer, 0xAF, 0x00,0x4E, 0xFF);
-		for(int i = 0; i<= rayToRender.back()->previousXs.size(); i++ ){ //TODO: Change depending on implementation of LightRay in Game
-			DrawCircle(rayToRender.back()->previousXs[i] + p_width/2, rayToRender.back()->previousYs[i] + p_height/2, 5);
+		for (auto &ray : raysToRender){
+			for(int i = 0; i<= ray->previousXs.size(); i++ ){ //Render each light ray as 5 circles at last 5 positions of ray
+				DrawDisk(ray->previousXs[i] + p_width/2, ray->previousYs[i] + p_height/2, 5);
+			}
 		}
 
 	}
+
 	// Update Screen
   	SDL_RenderPresent(sdl_renderer);
+
+  	//Present End Screen if won or lost
+ 	if (!game.running()){
+		if(game.gameWon()){ //target object explodes followed by black screen and win message
+			double targetX, targetY, targetRadius;
+			orbitersToRender[-2]->getPosition(targetX,targetY);
+			targetRadius = orbitersToRender[-2]->getSize();
+
+			SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00,0x00, 0xFF);
+			DrawCircle(targetX,targetY,targetRadius + 3);
+			SDL_RenderPresent(sdl_renderer);
+			SDL_Delay(50);
+
+			ClearScreen();
+			SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00,0x00, 0xEE);
+			DrawCircle(targetX,targetY,targetRadius + 3);
+			DrawCircle(targetX,targetY,targetRadius + 10);
+			SDL_RenderPresent(sdl_renderer);
+			SDL_Delay(100);
+
+			ClearScreen();
+			SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00,0x00, 0xCC);
+			DrawCircle(targetX,targetY,targetRadius + 10);
+			DrawCircle(targetX,targetY,targetRadius + 20);
+			SDL_RenderPresent(sdl_renderer);
+			SDL_Delay(200);
+
+			SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x00,0x00, 0xFF);
+			SDL_RenderClear(sdl_renderer);
+			SDL_RenderPresent(sdl_renderer);
+			std::cout << "You Win! " << std::endl;
+
+
+		}else{ //Player object explodes followed by black screen and lose message
+			double playerX, playerY, playerRadius;
+			orbitersToRender[-1]->getPosition(playerX, playerY);
+			playerRadius = orbitersToRender[-1]->getSize();
+
+			SDL_SetRenderDrawColor(sdl_renderer,0x00, 0x4B,0xFF, 0xFF);
+			DrawCircle(playerX, playerY, playerRadius + 3);
+			SDL_RenderPresent(sdl_renderer);
+			SDL_Delay(50);
+
+			ClearScreen();
+			SDL_SetRenderDrawColor(sdl_renderer,0x00, 0x4B,0xFF, 0xEE);
+			DrawCircle(playerX, playerY, playerRadius + 3);
+			DrawCircle(playerX, playerY, playerRadius + 10);
+			SDL_RenderPresent(sdl_renderer);
+			SDL_Delay(100);
+
+			ClearScreen();
+			SDL_SetRenderDrawColor(sdl_renderer,0x00, 0x4B,0xFF, 0xCC);
+			DrawCircle(playerX, playerY, playerRadius + 10);
+			DrawCircle(playerX, playerY, playerRadius + 20);
+			SDL_RenderPresent(sdl_renderer);
+			SDL_Delay(200);
+
+			SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x00,0x00, 0xFF);
+			SDL_RenderClear(sdl_renderer);
+			SDL_RenderPresent(sdl_renderer);
+			std::cout << "You Lose! " << std::endl;
+
+		}
+	} 	
 
 
 }
 
 
-void Display::DrawCircle(int centreX, int centreY, int radius)
+void Display::DrawDisk(int centreX, int centreY, int radius)
 {
     for (int w = 0; w < radius * 2; w++)
     {
@@ -97,5 +169,42 @@ void Display::DrawCircle(int centreX, int centreY, int radius)
             }
         }
     }
+}
+void Display::DrawCircle(int centreX, int centreY, int radius)
+{
+   const int diameter = (radius * 2);
+
+   int x = (radius - 1);
+   int y = 0;
+   int tx = 1;
+   int ty = 1;
+   int error = (tx - diameter);
+
+   while (x >= y)
+   {
+      //  Each of the following renders an octant of the circle
+      SDL_RenderDrawPoint(sdl_renderer, centreX + x, centreY - y);
+      SDL_RenderDrawPoint(sdl_renderer, centreX + x, centreY + y);
+      SDL_RenderDrawPoint(sdl_renderer, centreX - x, centreY - y);
+      SDL_RenderDrawPoint(sdl_renderer, centreX - x, centreY + y);
+      SDL_RenderDrawPoint(sdl_renderer, centreX + y, centreY - x);
+      SDL_RenderDrawPoint(sdl_renderer, centreX + y, centreY + x);
+      SDL_RenderDrawPoint(sdl_renderer, centreX - y, centreY - x);
+      SDL_RenderDrawPoint(sdl_renderer, centreX - y, centreY + x);
+
+      if (error <= 0)
+      {
+         ++y;
+         error += ty;
+         ty += 2;
+      }
+
+      if (error > 0)
+      {
+         --x;
+         tx += 2;
+         error += (tx - diameter);
+      }
+   }
 }
 

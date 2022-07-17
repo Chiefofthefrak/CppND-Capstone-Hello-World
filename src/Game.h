@@ -18,18 +18,24 @@ public:
     std::vector<std::shared_ptr<LightRay>> getLightRay();
     std::vector<std::shared_ptr<OrbitObject>> getOrbiters();
     bool LightFired();
+    bool running();
+    bool gameWon();
 
     // typical behaviour methods
-    void Update();
-    void readInput(int &mouseX, int &mouseY, bool &mousePressed);
+    void Update(); //Updates the game state for Orbiters and light etc
+    void readInput(int &mouseX, int &mouseY, bool &mousePressed); //Reads mouse position and if left mouse has been pressed
 
     // behaviour for specific actions
     void Win();
     void Lose();
 
+
    
 
 protected:
+
+        bool running = true;
+        bool gameWon = false;
 
         bool lightFired = false;
         std::vector<std::shared_ptr<OrbitObject>> orbitPointers; //Holds a vector of all orbitObjects made by the game

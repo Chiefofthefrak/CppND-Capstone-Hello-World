@@ -23,7 +23,7 @@ public:
     OrbitObject(OrbitObject &&) = default;
 
 
-    // getter and setter
+    // getters and setters
     int getID() { return _id; }
     void setPosition(double x, double y);
     void getPosition(double &x, double &y);
@@ -45,7 +45,7 @@ public:
 protected:
     ObjectType _type;                 // identifies the class type
     int _id;                          // every orbit object has its own unique id
-    double _posX, _posY;             // orbit position 
+    double _posX, _posY;              // orbit position 
     double _vX, _vY;                  //Velocity
     double _Size;
 
@@ -74,11 +74,13 @@ public:
     //Orbit with higher force constant and adding previous positions to vectors
     void Orbit();
 
+    bool collisionCheck(OrbitObject object); //Checks if lightRay is within radius distance of an object
+
 protected:
     ObjectType _type;                 // identifies the class type
-    double _posX, _posY;             // orbit position 
+    double _posX, _posY;              // orbit position 
     double _vX, _vY;                  //Velocity
-    double _Size;
+    double _Size;                     //Radius
 };
 
 #endif

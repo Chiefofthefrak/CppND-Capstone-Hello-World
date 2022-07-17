@@ -18,13 +18,13 @@ int main(){
 	Uint32 frame_start;
 	Uint32 frame_end;
 	Uint32 frame_duration;
-	int target_frame_duration = 20; // milliseconds per frame at 60 frames per second.
+	int target_frame_duration = 20; // milliseconds per frame
 
 	Game game(screenwidth,screenheight);
 	Display display(screenwidth,screenheight);
 
 	
-	while (true) {
+	while (game.running()) {
 	    frame_start = SDL_GetTicks(); // Current time in milliseconds
 	    game.Update();
 	    display.Render(game);
@@ -33,7 +33,7 @@ int main(){
 	    frame_duration = frame_end - frame_start;
 
 	    if (frame_duration < target_frame_duration) {
-	      SDL_Delay(target_frame_duration - frame_duration);
+	      SDL_Delay(target_frame_duration - frame_duration); //Make sure that each frame lasts at least 20 seconds
 	    }
 
 	}

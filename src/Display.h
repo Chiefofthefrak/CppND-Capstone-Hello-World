@@ -19,7 +19,9 @@
 
     //Typical Behaviour methods
     void Render(Game game);
-    void DrawCircle(int centreX, int centreY, int radius); //Draw Circle using Midpoint Circle algorithm taken from https://stackoverflow.com/questions/38334081/howto-draw-circles-arcs-and-vector-graphics-in-sdl
+    void ClearScreen(); //Clears screen except central BH but doesnt update window
+    void DrawDisk(int centreX, int centreY, int radius); //Draw Circle using Midpoint Circle algorithm taken from https://stackoverflow.com/questions/38334081/howto-draw-circles-arcs-and-vector-graphics-in-sdl
+    void DrawCircle(int centreX, int centreY, int radius);
  	
  private:
 	

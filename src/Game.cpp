@@ -25,13 +25,6 @@ Game::Game(int screenwidth, int screenheight){
 
 
 }
-/*Game::~Game(){
-	    // set up thread barrier before this object is destroyed
-    std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
-        t.join();
-    });
-}*/
-
 
 void Game::Update(){
 
@@ -55,7 +48,7 @@ void Game::Update(){
     std::cout << "Threads empty? " << threads.empty() << std::endl;*/
 
     if(LightFired()){ //TODO: Update Light Position
-    	if(lightPointers.empty()){
+    	if(mousePressed){
     		//Find direction to mouse position from player position
     		double orbitPosX, orbitPosY;
     		orbitPointers.back()->getPosition(orbitPosX,orbitPosY);
@@ -67,8 +60,19 @@ void Game::Update(){
     		//Add lightray to light pointers and Orbit in direction of mouse at 500 units total speed
     		lightPointers.push_back(std::make_shared<LightRay>(3,light,orbitPosX,orbitPosY, (dx/std::abs(total)),(dy/std::abs(total))));
     	}
-    	for(auto &ray : lightPointers){ //Loop thru vector of pointers to lightRays and run orbit on each
+    	for(auto &ray : lightPointers){ //Loop thru vector of pointers to lightRays and run orbit and collisioncheck
 			ray->Orbit();
+			for (auto &orbitItem : orbitPointers){
+				if (ray->collisionCheck(orbitItem)){ //Check if ray collided with any orbitItem and do something depending on what type they are
+					switch orbitItem->getType()
+						case player:
+							Lose();
+						case target:
+							Win();
+						case asteroid:
+							lightPointers.erase(std::find(ray)); //ray is absorbed by asteroid
+				}
+			}
 		
 		}
 
@@ -96,4 +100,22 @@ std::vector<std::shared_ptr<OrbitObject>> Game::getOrbiters(){ //Returns the vec
 
 std::vector<std::shared_ptr<LightRay>> Game::getLightRay(){ //Returns the vector of pointers to LightRays
 	return lightPointers;
+}
+
+
+void Game::Win(){
+	running = false;
+	gameWon = true;
+
+}
+void Game::Lose(){
+	running = false;
+	gameWon = false;
+
+}
+bool Game::running(){
+	return running;
+}
+bool Game::gameWon(){
+	return gameWon;
 }
