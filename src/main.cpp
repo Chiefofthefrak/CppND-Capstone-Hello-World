@@ -14,6 +14,7 @@ int main(){
 	if(SDL_Init(SDL_INIT_VIDEO)>0){
 		std::cout << "SDL_INIT has Failed, ERROR: "<< SDL_GetError() << std::endl;
 	}
+	auto initialTime = SDL_GetTicks();
 
 	Uint32 frame_start;
 	Uint32 frame_end;
@@ -34,6 +35,10 @@ int main(){
 
 	    if (frame_duration < target_frame_duration) {
 	      SDL_Delay(target_frame_duration - frame_duration); //Make sure that each frame lasts at least 20 seconds
+	    }
+	    if (SDL_GetTicks() - initialTime >= 120000){
+	    	std::cout << "Took Too long ";
+	    	break;
 	    }
 
 	}
