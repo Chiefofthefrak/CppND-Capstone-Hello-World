@@ -68,7 +68,7 @@ void OrbitObject::Orbit() //Updates positions and velocities using Eulers method
 }
 LightRay::LightRay(double size, ObjectType type, double posX, double posY, double vX, double vY) : _Size(size), _type(type), _posX(posX), _posY(posY), _vX(vX), _vY(vY)
 {
-    std::cout << 
+    std::cout << " LightRay generated Facing " << vX << ", " << vY << std::endl;
 }
 
 void LightRay::Orbit() //Updates LightRay's position and adds to previous positions
@@ -136,17 +136,34 @@ bool LightRay::collisionCheck(OrbitObject object)
 {
     double objectX, objectY, objectSize;
     object.getPosition(objectX,objectY);
+    objectSize = object.getSize();
 
     double lightPosX, lightPosY;
     getPosition(lightPosX,lightPosY);
 
     double dx = std::abs(lightPosX - objectX);
     double dy = std::abs(lightPosY - objectY);
+    std::cout << " CollisionCheck called with object at " << objectX << ", " << objectY << " radius = " << objectSize << " and light at " << lightPosX << ", " << lightPosY << std::endl;
 
     if(dx <= objectSize and dy <= objectSize){
-        std::cout << "Ray has collided with "<< object.getType() << std::endl;
+        std::cout << "Ray has collided " << std::endl;
         return true;
     }else{
         return false;
     }
+}
+void LightRay::absorb(){
+    setPosition(0,0);
+    setVelocity(0.0);
+    setColour(0,0,0);
+}
+void LightRay::setColour(int r, int g, int b){
+    colourR = r;
+    colourG = g;
+    colourB = b;
+}
+void LightRay::getColour(int &r, int &g, int &b){
+    r = colourR;
+    g = colourG;
+    b = colourB;
 }

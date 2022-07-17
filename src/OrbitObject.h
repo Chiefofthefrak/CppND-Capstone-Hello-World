@@ -68,8 +68,12 @@ public:
     void setVelocity(double vX, double vY);
     void getVelocity(double &vX, double &vY);
 
+    void setColour(int r, int g, int b);
+    void getColour(int &r, int &g, int &b);
+
     //Orbit with higher force constant and adding previous positions to vectors
     void Orbit();
+    void absorb();
 
     bool collisionCheck( OrbitObject object); //Checks if lightRay is within radius distance of an object
 
@@ -78,6 +82,8 @@ protected:
     double _posX, _posY;              // orbit position 
     double _vX, _vY;                  //Velocity
     double _Size;                     //Radius
+
+    int colourR, colourG, colourB; //RGB colour of the ray
 };
 
 #endif

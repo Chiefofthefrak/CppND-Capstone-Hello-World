@@ -39,16 +39,11 @@ void Game::Update(){
 
 	for(auto &orbitItem : orbitPointers){ //Loop thru vector of pointers to orbitObjects and run orbit on each
 		orbitItem->Orbit();
-		//threads.emplace_back(&OrbitObject::Orbit, orbitItem); 
 	}
 
-   /* std::for_each(threads.begin(), threads.end(), [](std::thread &t) {
-        t.join();
-    });
-    std::cout << "Threads empty? " << threads.empty() << std::endl;*/
 
     if(LightFired()){ //TODO: Update Light Position
-    	if(mousePressed){
+    	if(mousePressed and lightPointers.size() <= 20){
     		//Find direction to mouse position from player position
     		double orbitPosX, orbitPosY;
     		orbitPointers.back()->getPosition(orbitPosX,orbitPosY);
@@ -58,21 +53,27 @@ void Game::Update(){
 
 
     		//Add lightray to light pointers and Orbit in direction of mouse at 500 units total speed
-    		lightPointers.push_back(std::make_shared<LightRay>(2,light,orbitPosX,orbitPosY, (dx/std::abs(total)*1.5),(dy/std::abs(total))*1.5));
+    		lightPointers.push_back(std::make_shared<LightRay>(2,light,orbitPosX,orbitPosY, (dx/std::abs(total)*5),(dy/std::abs(total))*5));
     	}
     	int lightPointerNumber = 0;
     	for(auto &ray : lightPointers){ //Loop thru vector of pointers to lightRays and run orbit and collisioncheck
 			ray->Orbit();
+
+			double rayX,rayY; 
+			ray->getPosition(rayX,rayY);
+			if(std::sqrt(rayX*rayX + rayY*rayY) <= screenwidth/8){ //Absorb if collided with BH
+				ray->absorb();
+			}
+
 			for (auto &orbitItem : orbitPointers){
 				if (ray->collisionCheck(*orbitItem)){ //Check if ray collided with any orbitItem and do something depending on what type they are
-					switch (orbitItem->getType()){
-						case player:
-							Lose();
+					switch (orbitItem->getType()){				
 						case target:
 							Win();
 						case asteroid://ray is absorbed by asteroid
-							lightPointers.erase(lightPointers.begin() + lightPointerNumber);
-							std::cout << " Ray Erased " << std::endl;					} 
+							ray->absorb();
+							std::cout << " Ray absorbed " << std::endl;					
+						} 
 				}
 			}
 			lightPointerNumber++;
@@ -110,14 +111,6 @@ void Game::Win(){
 	gameWon = true;
 
 }
-void Game::Lose(){
-	running = false;
-	gameWon = false;
-
-}
 bool Game::Running(){
 	return running;
-}
-bool Game::GameWon(){
-	return gameWon;
 }

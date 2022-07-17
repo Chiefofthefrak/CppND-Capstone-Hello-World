@@ -19,7 +19,6 @@ public:
     std::vector<std::shared_ptr<OrbitObject>> getOrbiters();
     bool LightFired();
     bool Running();
-    bool GameWon();
 
     // typical behaviour methods
     void Update(); //Updates the game state for Orbiters and light etc
@@ -27,7 +26,6 @@ public:
 
     // behaviour for specific actions
     void Win();
-    void Lose();
 
 
    
@@ -35,8 +33,6 @@ public:
 protected:
 
         bool running = true;
-        bool gameWon = false;
-
         bool lightFired = false;
         std::vector<std::shared_ptr<OrbitObject>> orbitPointers; //Holds a vector of all orbitObjects made by the game
         std::vector<std::shared_ptr<LightRay>> lightPointers; //Container for LightRay
