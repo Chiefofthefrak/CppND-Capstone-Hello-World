@@ -29,7 +29,7 @@ Game::Game(int screenwidth, int screenheight): screenwidth(screenwidth), screenh
 
 void Game::Update(){
 
-	double mouseX, mouseY;
+	int mouseX, mouseY;
 	bool mousePressed = false;
 
 	readInput(mouseX, mouseY, mousePressed);
@@ -54,7 +54,7 @@ void Game::Update(){
 
 
     		//Add lightray to light pointers and Orbit in direction of mouse at 8 units total speed from surface of player
-    		lightPointers.push_back(std::make_shared<LightRay>(2,light,orbitPosX+(dx/std::abs(total)*20),orbitPosY + (dy/std::abs(total)*20), (dx/std::abs(total)*8),(dy/std::abs(total))*8));
+    		lightPointers.push_back(std::make_shared<LightRay>(2,light,orbitPosX+(dx/(total))*20,orbitPosY + (dy/(total))*20, (dx/(total))*8,(dy/(total))*8));
     	}
     	int lightPointerNumber = 0;
     	for(auto &ray : lightPointers){ //Loop thru vector of pointers to lightRays and run orbit and collisioncheck
@@ -87,7 +87,7 @@ void Game::Update(){
 void Game::readInput(int &mouseX, int &mouseY, bool &mousePressed){ //Track Mouse and determine when left mouse is pressed
 
 	SDL_PumpEvents();  // make sure we have the latest mouse state.
-	auto buttons = SDL_GetRelativeMouseState(&mouseX, &mouseY);
+	auto buttons = SDL_GetMouseState(&mouseX, &mouseY);
 
 	if ((buttons & SDL_BUTTON_LMASK) != 0) {
 		mousePressed = true;

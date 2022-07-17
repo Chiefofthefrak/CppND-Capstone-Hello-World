@@ -68,7 +68,7 @@ void OrbitObject::Orbit() //Updates positions and velocities using Eulers method
 }
 LightRay::LightRay(double size, ObjectType type, double posX, double posY, double vX, double vY) : _Size(size), _type(type), _posX(posX), _posY(posY), _vX(vX), _vY(vY)
 {
-    std::cout << " LightRay generated Facing " << vX << ", " << vY << std::endl;
+   // std::cout << " LightRay generated Facing " << vX << ", " << vY << std::endl;
 }
 
 void LightRay::Orbit() //Updates LightRay's position and adds to previous positions
@@ -95,7 +95,7 @@ void LightRay::Orbit() //Updates LightRay's position and adds to previous positi
     previousXs.push_back(x);
     previousYs.push_back(y);
 
-    if (previousXs.size()>5){
+    if (previousXs.size()>8){
         previousXs.pop_front();
         previousYs.pop_front();
     }
