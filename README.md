@@ -46,7 +46,7 @@ Ths src directory contains all of the .h and .cpp files necessary to run the pro
 
 * Display.cpp and Diplay.h contain the Display class which has the function Render which renders the game state to the screen, as well as some functions to make this easier.
 
-* OrbitObject.cpp and OrbitObject.h have the classes OrbitObject and LightRay which control how asteroids, target and player, and the projectile behave respectively. Both contain the functio Orbit which updates the positions and velocities of the objects as well as various other functions.
+* OrbitObject.cpp and OrbitObject.h have the classes OrbitObject and LightRay which control how asteroids, target and player, and the projectile behave respectively. Both contain the function Orbit which updates the positions and velocities of the objects as well as various other functions.
 
 ## Rubric Information
 
